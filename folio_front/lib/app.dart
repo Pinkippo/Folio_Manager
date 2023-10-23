@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:folio_front/app/controller/app_controller.dart';
-import 'package:folio_front/app/screen/login_page.dart';
+import 'package:folio_front/app/screen/main_page.dart';
 import 'package:get/get.dart';
 
-
-class App extends StatelessWidget {
-
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +28,7 @@ class App extends StatelessWidget {
           child: child!,
         );
       },
-      title: 'Folio',
-      home: const Text('Folio'),
+      home: const MainPage(),
     );
   }
 }

@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:folio_front/app/screen/app_page.dart';
+import 'package:folio_front/app.dart';
 
 import 'package:folio_front/main.dart';
 
