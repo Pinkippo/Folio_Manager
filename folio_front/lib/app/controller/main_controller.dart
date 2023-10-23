@@ -37,6 +37,14 @@ class MainController extends GetxController with GetSingleTickerProviderStateMix
   //탭 컨트롤러 선언
   late TabController tabController;
 
+  /// TODO : 로그인 여부 관리 로직 구현
+
+  RxBool isLoggedIn = true.obs;
+
+  void changeLoginState() {
+    isLoggedIn.toggle();
+  }
+
   // 탭 컨트롤러 초기화
   @override
   void onInit() {
