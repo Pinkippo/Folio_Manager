@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### 어플리케이션 키 ###
+application.properties
+application-API-KEY.properties
