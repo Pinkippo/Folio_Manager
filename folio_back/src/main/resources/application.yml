@@ -1,0 +1,45 @@
+server: # ?? ??
+  port: 80
+
+spring: # ??? ??
+  application:
+    name: spring-shop
+  jpa: # JPA ??
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy # ?????? ?????? ??
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect # MySQL 8.0
+    open-in-view: true # JPA ??? ????? View?? ??
+    properties:
+      hibernate:
+        format_sql: true # SQL ??? ??
+
+
+  datasource: # ?????? ?? ??
+    url: jdbc:mysql://localhost:3306/folio?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234567890
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  thymeleaf:
+    cache: false
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+  security:
+    user:
+      name: test@test.com
+      password: 1234
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace # SQL ?? ??
