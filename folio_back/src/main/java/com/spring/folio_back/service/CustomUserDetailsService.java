@@ -9,16 +9,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * CustomUserDetailsService - 사용자의 정보를 불러오는 클래스
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * loadUserByUsername() - 사용자의 정보를 불러오는 메서드
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // 이 메서드는 주어진 username으로 사용자 정보를 가져오는 역할을 합니다.
-        // 실제로는 데이터베이스 또는 다른 데이터 저장소에서 사용자 정보를 검색해야 합니다.
+
         User user = userRepository.findByEmail(email);
 
         if (user == null) {

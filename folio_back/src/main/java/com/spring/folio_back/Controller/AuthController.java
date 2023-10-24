@@ -1,6 +1,6 @@
 package com.spring.folio_back.Controller;
 
-import com.spring.folio_back.config.JwtHelper;
+import com.spring.folio_back.jwt.JwtHelper;
 import com.spring.folio_back.dto.JwtRequest;
 import com.spring.folio_back.dto.JwtResponse;
 import com.spring.folio_back.dto.RegisterRequestDTO;
@@ -15,9 +15,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 로그인 회원가입을 위한 컨트롤러
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -38,6 +40,9 @@ public class AuthController {
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
 
+    /**
+     * 로그인 - 정보가 있는지 확인한 후 JWT 토큰 발급
+     */
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
 
@@ -53,6 +58,9 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * 회원가입 - 정보가 있는지 확인한 후 JWT 토큰 발급
+     */
     @PostMapping("/register")
     public ResponseEntity<JwtResponse> register(@RequestBody RegisterRequestDTO request) {
             long uid = userService.registerUser(request);
@@ -67,6 +75,9 @@ public class AuthController {
             return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * 인증 - 아이디와 비밀번호가 일치하는지 확인
+     */
     private void doAuthenticate(String email, String password) {
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);

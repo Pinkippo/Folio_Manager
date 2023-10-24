@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * 유저 엔티티
+ */
 @Entity
 @Getter
 @Setter
@@ -33,6 +36,10 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    /**
+     * UserDetails 인터페이스의 메소드 구현
+     */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

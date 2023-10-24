@@ -1,6 +1,5 @@
-package com.spring.folio_back.config;
+package com.spring.folio_back.jwt;
 
-import com.spring.folio_back.service.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
@@ -21,6 +20,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * JwtAuthenticationFilter - JWT 토큰을 검사하여 유효한 사용자인지 확인
+ */
 @Component
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -33,19 +35,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * doFilterInternal() - JWT 토큰을 검사하여 유효한 사용자인지 확인
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        // 헤더에서 토큰을 가져옴
         String requestHeader = request.getHeader("Authorization");
 
         logger.info(" Header :  {}", requestHeader);
         String username = null;
         String token = null;
+
+        // JWT 토큰의 형식은 "Bearer token"으로 구성
         if (requestHeader != null && requestHeader.startsWith("Bearer")) {
-            //looking good
+
             token = requestHeader.substring(7);
             try {
 
+                // JWT 토큰에서 username을 추출
                 username = this.jwtHelper.getUsernameFromToken(token);
 
             } catch (IllegalArgumentException e) {
@@ -59,29 +68,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
-
             }
-
 
         } else {
             logger.info("Invalid Header Value !! ");
         }
-
-
-        //
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-
-            //fetch user detail from username
+            // DB에서 username을 기반으로 UserDetails 객체를 가져옴
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
             if (validateToken) {
 
-                //set the authentication
+                // JWT 토큰이 유효하면, Spring Security를 사용하여 수동으로 인증을 설정
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
 
             } else {
                 logger.info("Validation fails !!");
@@ -91,7 +93,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-
 
     }
 }
