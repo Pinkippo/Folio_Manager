@@ -19,47 +19,59 @@ class MainPage extends GetView<MainController> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        bottom: TabBar(
-          indicatorColor: Colors.yellowAccent,
-          dividerColor: Colors.yellow,
-
-          controller: controller.tabController,
-          tabs: controller.myTabs,
-
-        ),
-        title: const Text(
-          'Folio',
-          style: TextStyle(
-              fontFamily: 'LS',
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Colors.black),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              controller.changeLoginState();
-            },
-            icon: const Icon(
-              Icons.login,
-              color: Colors.black,
+        title: Row(
+          children: [
+            SizedBox(
+              width: Get.width * 0.02,
             ),
-          ),
-        ],
+            const Text(
+              'Folio',
+              style: TextStyle(
+                fontFamily: 'LS',
+                fontSize: 30,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
         centerTitle: false,
         elevation: 0,
         backgroundColor: Colors.white,
+        actions: [
+          TabBar(
+            isScrollable: true,
+            indicatorColor: Colors.grey[700],
+            controller: controller.tabController,
+            tabs: controller.myTabs,
+            labelStyle: const TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+            ),
+            indicator: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey[700]!,
+                ),
+              ),
+            ),
+            labelPadding: const EdgeInsets.symmetric(horizontal: 10),
+          ),
+          SizedBox(
+            width: Get.width * 0.05,
+          )
+        ],
       ),
       body: TabBarView(
         controller: controller.tabController,
-        children: [
-          const ExplainPage(),
-          const PortfolioPage(),
-          Obx(() {
-            return controller.isLoggedIn.value ? const MyPage() : const LoginPage();
-          }),
+        children: const [
+          ExplainPage(),
+          PortfolioPage(),
+          MyPage(),
         ],
       ),
     );
+
   }
 }

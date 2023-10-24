@@ -2,34 +2,76 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController with GetSingleTickerProviderStateMixin {
-
   //탭 클릭 감지시 표시될 탭바 UI.
   final List<Tab> myTabs = <Tab>[
     const Tab(
-      child: Text(
-        '안내말',
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 15,
-            fontWeight: FontWeight.w700),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            '안내말',
+            style: TextStyle(
+                color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+        ],
       ),
     ),
     const Tab(
-      child: Text(
-        '포트폴리오',
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 15,
-            fontWeight: FontWeight.w700),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            '포트폴리오',
+            style: TextStyle(
+                color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+        ],
       ),
     ),
-    const Tab(
-      child: Text(
-        '마이페이지',
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 15,
-            fontWeight: FontWeight.w700),
+    Tab(
+      child: Stack(
+        children: [
+          const Row(
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+               Center(
+                child: Text(
+                  '마이페이지',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: () {
+                print('로그인 페이지로 이동');
+                if(Get.find<MainController>().isLoggedIn.value == false) {
+                  Get.toNamed('/login');
+                }
+              },
+            ),
+          ),
+        ],
       ),
     ),
   ];
@@ -39,11 +81,9 @@ class MainController extends GetxController with GetSingleTickerProviderStateMix
 
   /// TODO : 로그인 여부 관리 로직 구현
 
-  RxBool isLoggedIn = true.obs;
+  RxBool isLoggedIn = false.obs;
 
-  void changeLoginState() {
-    isLoggedIn.toggle();
-  }
+
 
   // 탭 컨트롤러 초기화
   @override
