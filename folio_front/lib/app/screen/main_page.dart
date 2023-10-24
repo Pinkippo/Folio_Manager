@@ -1,20 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:folio_front/app/controller/main_controller.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/screen/explain_page.dart';
-import 'package:folio_front/app/screen/login_page.dart';
-import 'package:folio_front/app/screen/my_page.dart';
 import 'package:folio_front/app/screen/portfolio_page.dart';
 import 'package:get/get.dart';
 
-/// TODO : 로그인 버튼을 통한 로그인 화면 이동 및 마이페이지 연결 수정
-class MainPage extends GetView<MainController> {
-  const MainPage({super.key});
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
+
+  late TabController tabController;
+
+  final storage = const FlutterSecureStorage();
+
+  String? jwtToken;
+
+  List<Tab> myTabs = [
+    const Tab(
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            '안내말',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+        ],
+      ),
+    ),
+    const Tab(
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            '포트폴리오',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+        ],
+      ),
+    ),
+  ];
+
+  @override
+  void initState() {
+
+    getToken();
+    tabController = TabController(length: myTabs.length, vsync: this);
+    super.initState();
+
+  }
+
+  getToken() async {
+    jwtToken = await storage.read(key: 'jwt');
+    print('jwtToken : $jwtToken');
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    Get.put(MainController());
-
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -22,15 +91,20 @@ class MainPage extends GetView<MainController> {
         title: Row(
           children: [
             SizedBox(
-              width: Get.width * 0.02,
+              width: MediaQuery.of(context).size.width * 0.02,
             ),
-            const Text(
-              'Folio',
-              style: TextStyle(
-                fontFamily: 'LS',
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
+            GestureDetector(
+              onTap: () {
+                Get.offAllNamed('/');
+              },
+              child: const Text(
+                'Folio',
+                style: TextStyle(
+                  fontFamily: 'LS',
+                  fontSize: 44,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
               ),
             ),
           ],
@@ -42,8 +116,8 @@ class MainPage extends GetView<MainController> {
           TabBar(
             isScrollable: true,
             indicatorColor: Colors.grey[700],
-            controller: controller.tabController,
-            tabs: controller.myTabs,
+            controller: tabController,
+            tabs: myTabs,
             labelStyle: const TextStyle(
               color: Colors.black,
               fontSize: 15,
@@ -59,19 +133,17 @@ class MainPage extends GetView<MainController> {
             labelPadding: const EdgeInsets.symmetric(horizontal: 10),
           ),
           SizedBox(
-            width: Get.width * 0.05,
+            width: MediaQuery.of(context).size.width * 0.05,
           )
         ],
       ),
       body: TabBarView(
-        controller: controller.tabController,
-        children: const [
+        controller: tabController,
+        children: const[
           ExplainPage(),
           PortfolioPage(),
-          MyPage(),
         ],
       ),
     );
-
   }
 }

@@ -30,4 +30,24 @@ class MyApiClient {
     }
   }
 
+  Future<RegisterResponseModel> login (RegisterRequestModel requestModel) async{
+    final url = Uri.parse('$baseUrl/auth/login');
+
+    final response = await httpClient.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(requestModel.toJson()),
+    );
+
+    if (response.statusCode == 200) {
+      RegisterResponseModel responseModel = RegisterResponseModel.fromJson(jsonDecode(response.body));
+      return responseModel;
+    } else {
+      throw Exception('Failed to login');
+      // TODO : 에러 처리
+    }
+  }
+
 }

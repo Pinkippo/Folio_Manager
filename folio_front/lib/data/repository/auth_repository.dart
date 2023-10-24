@@ -11,4 +11,8 @@ class AuthRepository{
     return apiClient.register(requestModel);
   }
 
+  login(RegisterRequestModel requestModel) {
+    return apiClient.login(requestModel);
+  }
+
 }

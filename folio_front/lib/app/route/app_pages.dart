@@ -9,7 +9,7 @@ part 'app_routes.dart';
 class AppPages {
   static final pages = [
     GetPage(
-        name: Routes.initial, page: () => const App()),
+        name: Routes.initial, page: () => const App(), binding: LoginBinding()),
     GetPage(
         name: Routes.login, page: () => LoginPage(), binding: LoginBinding(), transition: Transition.native),
   ];

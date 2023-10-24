@@ -12,6 +12,13 @@ class RegisterRequestModel {
     required this.nickname,
   });
 
+  // 이메일과 비밀번호만 가지는 생성자
+  RegisterRequestModel.emailPassword({
+    required this.email,
+    required this.password,
+  }) : nickname = '';
+
+
   Map<String, dynamic> toJson() {
     return {
       'email': email,

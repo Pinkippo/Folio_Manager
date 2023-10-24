@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:folio_front/app/controller/main_controller.dart';
 import 'package:folio_front/app/screen/main_page.dart';
 import 'package:get/get.dart';
 
