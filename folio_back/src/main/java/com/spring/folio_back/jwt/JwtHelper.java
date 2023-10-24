@@ -28,7 +28,6 @@ public class JwtHelper {
      * JWT 토큰의 유효시간 3600 * 60 * 60 = 150일
      */
     public static final long JWT_TOKEN_VALIDITY = 3600 * 60 * 60;
-    private String secret = jwtKey;
 
     /**
      * getUsernameFromToken() - JWT 토큰에서 username을 추출
@@ -56,7 +55,7 @@ public class JwtHelper {
      * getAllClaimsFromToken() - JWT 토큰에서 모든 정보 추출
      */
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(jwtKey).parseClaimsJws(token).getBody();
     }
 
     /**
@@ -82,7 +81,7 @@ public class JwtHelper {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, jwtKey).compact();
     }
 
     /**
