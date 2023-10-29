@@ -42,11 +42,12 @@ class MyApiClient {
     );
 
     if (response.statusCode == 200) {
-      RegisterResponseModel responseModel = RegisterResponseModel.fromJson(jsonDecode(response.body));
-      return responseModel;
+      return  RegisterResponseModel.fromJson(jsonDecode(response.body));
+    } else if(response.statusCode == 401){
+      return RegisterResponseModel(success: false, jwtToken: '', username: '');
     } else {
-      throw Exception('Failed to login');
-      // TODO : 에러 처리
+      throw Exception('Failed to register');
+      // TODO : 추후 에러 처리
     }
   }
 

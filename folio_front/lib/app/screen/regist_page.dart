@@ -3,14 +3,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/login_controller.dart';
 import 'package:folio_front/app/widget/gradient_button.dart';
 import 'package:folio_front/app/widget/login_field.dart';
-import 'package:folio_front/data/model/register_reponse_model.dart';
 import 'package:folio_front/data/model/register_request_model.dart';
-import 'package:folio_front/data/provider/api.dart';
-import 'package:folio_front/data/repository/auth_repository.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends GetView<LoginController> {
-  const LoginPage({super.key});
+class RegisterPage extends GetView<LoginController> {
+  const RegisterPage({super.key});
 
   final storage = const FlutterSecureStorage();
 
@@ -23,7 +20,7 @@ class LoginPage extends GetView<LoginController> {
             children: [
               SizedBox(height : Get.height * 0.25),
               const Text(
-                'Folio',
+                'Folio Register',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
@@ -32,17 +29,15 @@ class LoginPage extends GetView<LoginController> {
               const SizedBox(height: 50),
               LoginField(hintText: 'Email', obscureText: false, onChanged: Get.find<LoginController>().updateUsername),
               const SizedBox(height: 15),
+              LoginField(hintText: 'Name', obscureText: false, onChanged: Get.find<LoginController>().updateName),
+              const SizedBox(height: 15),
               LoginField(hintText: 'Password', obscureText: true, onChanged: Get.find<LoginController>().updatePassword),
-              const SizedBox(height: 20),
               const SizedBox(height: 15),
-              GradientButton(
-                hintText: "로그인",
-                onPressed: login,
-              ),
-              const SizedBox(height: 15),
+              LoginField(hintText: 'Password Check', obscureText: true, onChanged: Get.find<LoginController>().updatePasswordCheck),
+              const SizedBox(height: 35),
               GradientButton(
                 hintText: "회원가입",
-                onPressed: registerMove,
+                onPressed: register,
               ),
               SizedBox(height : Get.height * 0.25),
             ],
@@ -52,25 +47,28 @@ class LoginPage extends GetView<LoginController> {
     );
   }
 
-  login() async {
-
-    if(Get.find<LoginController>().email == RxString('') || Get.find<LoginController>().password == RxString('')) {
-      Get.snackbar('로그인 요청 실패', '아이디와 비밀번호를 확인해주세요.');
+  register() async {
+    if(Get.find<LoginController>().email == RxString('') || Get.find<LoginController>().password == RxString('') || Get.find<LoginController>().name == RxString('')) {
+      Get.snackbar('회원가입 요청 실패', '아이디와 비밀번호를 입력했는지 확인해주세요.');
+      return;
+    }
+    if(!Get.find<LoginController>().checkPassword()) {
+      Get.snackbar('회원가입 요청 실패', '비밀번호가 일치하지 않습니다.');
       return;
     }
 
-    await Get.find<LoginController>().login().then((value) {
+    await Get.find<LoginController>().register(
+        RegisterRequestModel(
+            email: Get.find<LoginController>().email.value,
+            password: Get.find<LoginController>().password.value,
+            name: Get.find<LoginController>().name.value)).then((value) {
       if (value != '') {
         storage.write(key: 'jwt', value: value);
         Get.toNamed('/');
       } else {
-        Get.snackbar('로그인 실패', '아이디와 비밀번호를 확인해주세요.');
+        Get.snackbar('회원가입 실패', '회원가입에 실패하였습니다. 다시 시도해주세요.');
       }
     });
-  }
 
-  registerMove() async{
-    Get.toNamed('/register');
   }
-
 }

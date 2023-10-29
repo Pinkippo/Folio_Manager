@@ -10,31 +10,58 @@ class LoginController extends GetxController{
 
   LoginController({required this.authRepository});
 
+  // 유저 로그인 상태
   final Rx<RegisterResponseModel?> registerResponse = Rx<RegisterResponseModel?>(null);
 
-
-  Future<void> register(RegisterRequestModel requestModel) async {
-    final response = await authRepository.register(requestModel);
-    registerResponse.value = response;
-  }
-
-  Future<String> login() async {
-    final response = await authRepository.login(RegisterRequestModel.emailPassword(email: username.value, password: password.value));
-    registerResponse.value = response;
-    return registerResponse.value!.jwtToken;
-  }
-
+  // 유저 로그인 상태 -> jwtToken
   String? get jwtToken => registerResponse.value?.jwtToken;
 
-  final RxString username = RxString(''); // 사용자명 상태를 저장
-  final RxString password = RxString(''); // 비밀번호 상태를 저장
+  // 유저 로그인 상태 - ID / PW
+  final RxString email = RxString('');
+  final RxString password = RxString('');
 
-  void updateUsername(String value) {
-    username.value = value; // 사용자명 업데이트
+  // 회원가입 상태 - NAME / PW Check
+  final RxString name = RxString('');
+  final RxString passwordCheck = RxString('');
+
+
+  // 로그인
+  Future<String> login() async {
+    final RegisterResponseModel response = await authRepository.login(RegisterRequestModel.emailPassword(email: email.value, password: password.value));
+    registerResponse.value = response;
+    return (response.success) ? response.jwtToken : '';
   }
 
+  // 회원가입
+  Future<String> register(RegisterRequestModel requestModel) async {
+    final response = await authRepository.register(requestModel);
+    registerResponse.value = response;
+    return (response.success) ? response.jwtToken : '';
+  }
+
+  // ID 변경
+  void updateUsername(String value) {
+    email.value = value;
+  }
+
+  // PW 변경
   void updatePassword(String value) {
-    password.value = value; // 비밀번호 업데이트
+    password.value = value;
+  }
+
+  // NAME 변경
+  void updateName(String value) {
+    name.value = value;
+  }
+
+  // PW Check 변경
+  void updatePasswordCheck(String value) {
+    passwordCheck.value = value;
+  }
+
+  // PW Check
+  bool checkPassword() {
+    return password.value == passwordCheck.value;
   }
 
 }
