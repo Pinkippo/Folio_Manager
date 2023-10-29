@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:folio_front/common/app_colors.dart';
 import 'package:get/get.dart';
 
 class ExplainPage extends StatelessWidget {
@@ -11,7 +12,7 @@ class ExplainPage extends StatelessWidget {
         double containerWidth = constraints.maxWidth * 0.3;
 
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor:  AppColors.backgroundColor,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -24,17 +25,17 @@ class ExplainPage extends StatelessWidget {
                   children: [
                     Container(
                       // 255,227,155
-                      color: const Color.fromRGBO(255, 227, 155, 1),
+                      color: AppColors.mainColor,
                       height: 500,
                       width: containerWidth,
                     ),
                     Container(
-                      color: const Color.fromRGBO(255, 227, 155, 1),
+                      color: AppColors.mainColor,
                       height: 500,
                       width: containerWidth,
                     ),
                     Container(
-                      color: const Color.fromRGBO(255, 227, 155, 1),
+                      color: AppColors.mainColor,
                       height: 500,
                       width: containerWidth,
                     ),
@@ -52,7 +53,7 @@ class ExplainPage extends StatelessWidget {
                       constraints.maxWidth * 0.025
                   ),
                   child: Container(
-                    color: const Color.fromRGBO(255, 227, 155, 1),
+                    color: AppColors.mainColor,
                     height: 500,
                   ),
                 ),

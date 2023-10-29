@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/screen/explain_page.dart';
 import 'package:folio_front/app/screen/portfolio_page.dart';
+import 'package:folio_front/common/app_colors.dart';
 import 'package:get/get.dart';
 
 class MainPage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           Text(
             '안내말',
             style: TextStyle(
-              color: Colors.black,
+              color: AppColors.mainColor,
               fontSize: 15,
               fontWeight: FontWeight.w700,
             ),
@@ -49,7 +50,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           Text(
             '포트폴리오',
             style: TextStyle(
-              color: Colors.black,
+              color: AppColors.mainColor,
               fontSize: 15,
               fontWeight: FontWeight.w700,
             ),
@@ -86,7 +87,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: Row(
           children: [
@@ -103,7 +104,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                   fontFamily: 'LS',
                   fontSize: 44,
                   fontWeight: FontWeight.w700,
-                  color: Colors.black,
+                  color: AppColors.mainColor,
                 ),
               ),
             ),
@@ -111,7 +112,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         ),
         centerTitle: false,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundColor,
         actions: [
           TabBar(
             isScrollable: true,
@@ -119,7 +120,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             controller: tabController,
             tabs: myTabs,
             labelStyle: const TextStyle(
-              color: Colors.black,
+              color: AppColors.mainColor,
               fontSize: 15,
               fontWeight: FontWeight.w700,
             ),

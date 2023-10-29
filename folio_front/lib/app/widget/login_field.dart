@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:folio_front/common/app_colors.dart';
 
 class LoginField extends StatelessWidget {
   final String hintText;
@@ -24,14 +25,14 @@ class LoginField extends StatelessWidget {
           contentPadding: const EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color.fromRGBO(255, 227, 155, 1),
+              color: AppColors.mainColor,
               width: 3,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color.fromRGBO(255, 227, 155, 1),
+              color: AppColors.mainColor,
               width: 3,
             ),
             borderRadius: BorderRadius.circular(10),

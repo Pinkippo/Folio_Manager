@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/login_controller.dart';
+import 'package:folio_front/common/app_colors.dart';
 import 'package:get/get.dart';
 
 class PortfolioPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
         Padding(
           padding: EdgeInsets.fromLTRB(Get.width * 0.05, Get.height * 0.05, Get.width * 0.05, Get.width * 0.05),
           child: Container(
-            color: Colors.grey.shade500,
+            color: AppColors.backgroundColor,
             height: Get.height * 0.7,
             width: Get.width * 0.3,
             child: ElevatedButton(
