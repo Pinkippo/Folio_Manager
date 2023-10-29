@@ -44,10 +44,9 @@ public class AuthController {
      * 로그인 - 정보가 있는지 확인한 후 JWT 토큰 발급
      */
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
+    public JwtResponse login(@RequestBody JwtRequest request) {
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
 
         String token = this.helper.generateToken(userDetails);
@@ -55,7 +54,7 @@ public class AuthController {
         JwtResponse response = JwtResponse.builder()
                 .jwtToken(token)
                 .username(userDetails.getUsername()).build();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return response;
     }
 
     /**
@@ -88,11 +87,6 @@ public class AuthController {
             throw new BadCredentialsException(" Invalid Username or Password  !!");
         }
 
-    }
-
-    @ExceptionHandler(BadCredentialsException.class)
-    public String exceptionHandler() {
-        return "Credentials Invalid !!";
     }
 
 }
