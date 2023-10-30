@@ -38,6 +38,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Board> boards;
+
+
     /**
      * UserDetails 인터페이스의 메소드 구현
      */

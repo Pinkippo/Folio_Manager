@@ -1,4 +1,4 @@
-package com.spring.folio_back.repository;
+package com.spring.folio_back.repository.user;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

@@ -2,9 +2,8 @@ package com.spring.folio_back.service;
 
 import com.spring.folio_back.constant.Role;
 import com.spring.folio_back.entity.User;
-import com.spring.folio_back.repository.UserRepository;
+import com.spring.folio_back.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

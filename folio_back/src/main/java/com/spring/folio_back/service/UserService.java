@@ -1,10 +1,9 @@
 package com.spring.folio_back.service;
 
 import com.spring.folio_back.constant.Role;
-import com.spring.folio_back.dto.JwtResponse;
 import com.spring.folio_back.dto.RegisterRequestDTO;
 import com.spring.folio_back.entity.User;
-import com.spring.folio_back.repository.UserRepository;
+import com.spring.folio_back.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

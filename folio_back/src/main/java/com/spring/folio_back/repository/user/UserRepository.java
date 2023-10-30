@@ -1,4 +1,4 @@
-package com.spring.folio_back.repository;
+package com.spring.folio_back.repository.user;
 
 import com.spring.folio_back.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
