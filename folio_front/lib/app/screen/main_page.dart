@@ -89,6 +89,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
+        toolbarHeight: Get.height * 0.08,
         title: Row(
           children: [
             SizedBox(
@@ -102,7 +103,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                 'Folio',
                 style: TextStyle(
                   fontFamily: 'LS',
-                  fontSize: 44,
+                  fontSize: 54,
                   fontWeight: FontWeight.w700,
                   color: AppColors.mainColor,
                 ),

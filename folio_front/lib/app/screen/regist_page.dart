@@ -51,6 +51,7 @@ class RegisterPage extends GetView<LoginController> {
   }
 
   register() async {
+
     if(Get.find<LoginController>().email == RxString('') || Get.find<LoginController>().password == RxString('') || Get.find<LoginController>().name == RxString('')) {
       Get.snackbar('회원가입 요청 실패', '아이디와 비밀번호를 입력했는지 확인해주세요.');
       return;

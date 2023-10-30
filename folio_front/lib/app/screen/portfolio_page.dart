@@ -11,15 +11,26 @@ class PortfolioPage extends StatefulWidget {
   State<PortfolioPage> createState() => _PortfolioPageState();
 }
 
-class _PortfolioPageState extends State<PortfolioPage> {
-  final storage = const FlutterSecureStorage();
+class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProviderStateMixin{
 
+  final storage = const FlutterSecureStorage();
   String jwtToken = '';
+
+  late final AnimationController _controller;
+
+  final CurveTween _curve = CurveTween(curve: Curves.easeInOutCubic);
+  final double _rotateX = .75;
+  final double _rotateZ = .5;
+  final double _elevation = 100.0;
+
+  bool _isHovering = false;
 
   @override
   void initState() {
-
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 550));
     getToken();
+    // 인터렉션 에니메이션
+    _controller.forward();
     super.initState();
   }
 
@@ -28,43 +39,211 @@ class _PortfolioPageState extends State<PortfolioPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/image/background.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: null,
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(Get.width * 0.05, Get.height * 0.05, Get.width * 0.05, Get.width * 0.05),
-          child: Container(
-            color: AppColors.backgroundColor,
-            height: Get.height * 0.7,
-            width: Get.width * 0.3,
-            child: ElevatedButton(
-              onPressed: () {
-                // TODO : 로그인 유지 확인 후 로그인 or 글 작성 페이지 이동
-                if(jwtToken == '') {
-                  Get.snackbar('로그인 필요', '로그인 후 이용해주세요.');
-                  Get.toNamed('/login');
-                } else {
-                  Get.toNamed('/write');
-                }
-              },
-              child: const Text('포트폴리오 작성하기'),
-            ),
-          ),
-        ),
-      ],
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (BuildContext context, Widget? child) {
+        return Scaffold(
+          backgroundColor:
+          ColorTween(begin: AppColors.backgroundColor, end: Colors.black87)
+              .evaluate(_controller),
+          body: Stack(
+            children : [
+              Center(
+              child: MouseRegion(
+                onEnter: (_) => {
+                  _isHovering
+                      ? {}  // 이미 호버링 상태이므로 아무것도 하지 않음
+                      : {
+                    _controller.reverse(),  // 마우스가 들어갈 때 역방향으로 애니메이션
+                    _isHovering = true  // _isHovering을 true로 설정하여 호버링 상태로 변경
+                  }
+                },
+                onExit: (_) => {
+                  _isHovering
+                      ? {
+                    _controller.forward(),  // 마우스가 나갈 때 정방향으로 애니메이션
+                    _isHovering = false  // _isHovering을 false로 설정하여 일반 상태로 변경
+                  }
+                      : {}  // 이미 일반 상태이므로 아무것도 하지 않음
+                },
+                child: GestureDetector(
+                  onTap: () {
+                    if(jwtToken == '') {
+                      Get.snackbar('로그인 필요', '로그인 후 이용해주세요.');
+                      Get.toNamed('/login');
+                    } else {
+                      Get.toNamed('/write');
+                    }
+                  },
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Transform.translate(
+                        offset: Offset(
+                            0,
+                            Tween(begin: .0, end: _elevation * 0.75)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                        child: Transform(
+                          alignment: FractionalOffset.center,
+                          transform: Matrix4.identity()
+                            ..rotateX(Tween(begin: .0, end: _rotateX)
+                                .chain(_curve)
+                                .evaluate(_controller))
+                            ..rotateZ(Tween(begin: .0, end: _rotateZ)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                          child: Container(
+                            width: Get.width * 0.15,
+                            height: Get.height * 0.45,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: (ColorTween(
+                                      begin: Colors.red.withOpacity(0.55),
+                                      end: Colors.white.withOpacity(0.35))
+                                      .evaluate(_controller))!,
+                                  spreadRadius: 6,
+                                  blurRadius: 35,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Transform.translate(
+                        offset: Offset(
+                            0,
+                            Tween(begin: .0, end: _elevation * -0.25)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                        child: Transform(
+                          alignment: FractionalOffset.center,
+                          transform: Matrix4.identity()
+                            ..rotateX(Tween(begin: .0, end: _rotateX)
+                                .chain(_curve)
+                                .evaluate(_controller))
+                            ..rotateZ(Tween(begin: .0, end: _rotateZ)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                          child: Container(
+                            width: Get.width * 0.15,
+                            height: Get.height * 0.45,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Transform.translate(
+                        offset: Offset(
+                            0,
+                            Tween(begin: .0, end: _elevation * -1.25)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                        child: Transform(
+                          alignment: FractionalOffset.center,
+                          transform: Matrix4.identity()
+                            ..rotateX(Tween(begin: .0, end: _rotateX)
+                                .chain(_curve)
+                                .evaluate(_controller))
+                            ..rotateZ(Tween(begin: .0, end: _rotateZ)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                          child: Container(
+                            width: Get.width * 0.15,
+                            height: Get.height * 0.45,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(
+                                color: AppColors.backgroundColor,
+                                width: 4.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Transform.translate(
+                        offset: Offset(
+                            0,
+                            Tween(begin: .0, end: -2.25 * _elevation)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                        child: Transform(
+                          alignment: FractionalOffset.center,
+                          transform: Matrix4.identity()
+                            ..rotateX(Tween(begin: .0, end: _rotateX)
+                                .chain(_curve)
+                                .evaluate(_controller))
+                            ..rotateZ(Tween(begin: .0, end: _rotateZ)
+                                .chain(_curve)
+                                .evaluate(_controller)),
+                          child: Container(
+                            padding: const EdgeInsets.all(24.0),
+                            width: Get.width * 0.15,
+                            height: Get.height * 0.45,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(
+                                color: (ColorTween(
+                                    begin: Colors.transparent,
+                                    end: Colors.redAccent)
+                                    .evaluate(_controller))!,
+                                width: 4,
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '나만의 포트폴리오 제작하기',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                    color: (ColorTween(
+                                        begin: Colors.black,
+                                        end: Colors.white)
+                                        .evaluate(_controller))!,
+                                  ),
+                                ),
+                                const SizedBox(height: 6.0),
+                                Text(
+                                  'Folio',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14.0,
+                                    color: (ColorTween(
+                                        begin: Colors.black,
+                                        end: Colors.white)
+                                        .evaluate(_controller))!,
+                                  ),
+                                ),
+                                const SizedBox(height: 10.0),
+                                Container(
+                                  width: Get.width * 0.15,
+                                  height: 1,
+                                  color: AppColors.mainColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+             ),
+            ]
+          ),
+        );
+      },
     );
   }
 }
