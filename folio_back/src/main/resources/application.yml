@@ -32,10 +32,6 @@ spring: # 스프링 설정
       enabled: true
     livereload:
       enabled: true
-  security:
-    user:
-      name: test@test.com
-      password: 1234
 
 
 logging:

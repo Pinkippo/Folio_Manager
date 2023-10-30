@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      * loadUserByUsername() - 사용자의 정보를 불러오는 메서드
      */
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public User loadUserByUsername(String email) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(email);
 

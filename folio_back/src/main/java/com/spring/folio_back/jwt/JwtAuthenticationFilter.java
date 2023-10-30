@@ -1,5 +1,7 @@
 package com.spring.folio_back.jwt;
 
+import com.spring.folio_back.entity.User;
+import com.spring.folio_back.service.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * JwtAuthenticationFilter - JWT 토큰을 검사하여 유효한 사용자인지 확인
@@ -33,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtHelper jwtHelper;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     /**
      * doFilterInternal() - JWT 토큰을 검사하여 유효한 사용자인지 확인
@@ -75,13 +79,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
+            System.out.println("username : " + username);
+
             // DB에서 username을 기반으로 UserDetails 객체를 가져옴
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-            Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
+            User user = this.userDetailsService.loadUserByUsername(username);
+            Boolean validateToken = this.jwtHelper.validateToken(token, user);
             if (validateToken) {
 
                 // JWT 토큰이 유효하면, Spring Security를 사용하여 수동으로 인증을 설정
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, List.of(new SimpleGrantedAuthority(user.getRole().name())));
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
