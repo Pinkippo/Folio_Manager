@@ -53,11 +53,19 @@ class RegisterPage extends GetView<LoginController> {
   register() async {
 
     if(Get.find<LoginController>().email == RxString('') || Get.find<LoginController>().password == RxString('') || Get.find<LoginController>().name == RxString('')) {
-      Get.snackbar('회원가입 요청 실패', '아이디와 비밀번호를 입력했는지 확인해주세요.');
+      Get.snackbar(
+          '회원가입 요청 실패',
+          '아이디와 비밀번호를 입력했는지 확인해주세요.',
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
       return;
     }
     if(!Get.find<LoginController>().checkPassword()) {
-      Get.snackbar('회원가입 요청 실패', '비밀번호가 일치하지 않습니다.');
+      Get.snackbar(
+          '회원가입 요청 실패',
+          '비밀번호가 일치하지 않습니다.',
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
       return;
     }
 
@@ -70,7 +78,11 @@ class RegisterPage extends GetView<LoginController> {
         storage.write(key: 'jwt', value: value);
         Get.offAllNamed('/');
       } else {
-        Get.snackbar('회원가입 실패', '회원가입에 실패하였습니다. 다시 시도해주세요.');
+        Get.snackbar(
+            '회원가입 실패',
+            '회원가입에 실패하였습니다. 다시 시도해주세요.',
+            backgroundColor: Colors.red,
+            snackPosition: SnackPosition.BOTTOM);
       }
     });
 

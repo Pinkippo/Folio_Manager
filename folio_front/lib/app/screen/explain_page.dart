@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:folio_front/common/app_colors.dart';
+import 'package:get/get.dart';
 
 class ExplainPage extends StatefulWidget {
   const ExplainPage({super.key});
@@ -12,7 +13,6 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
 
   late final AnimationController _controller;
 
-  bool _isHovering = false;
   bool _isHoveringBox1 = false;
   bool _isHoveringBox2 = false;
   bool _isHoveringBox3 = false;
@@ -37,10 +37,10 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
       builder: (BuildContext context, Widget? child) {
       return LayoutBuilder(
         builder: (context, constraints) {
-          double containerWidth = constraints.maxWidth * 0.2;
+          double containerWidth = constraints.maxWidth * 0.25;
           return Scaffold(
             backgroundColor :
-            ColorTween(begin: AppColors.backgroundColor, end: Colors.black87)
+            ColorTween(begin: AppColors.backgroundColor, end: Colors.black)
                 .evaluate(_controller),
             body: SingleChildScrollView(
               child: Column(
@@ -70,23 +70,28 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
                               : {}  // 이미 일반 상태이므로 아무것도 하지 않음
                         },
                         child: SizedBox(
-                          height: 500,
+                          height: 300,
                           width: containerWidth,
                           child: Column(
                             children: [
                               Text(
-                                "쉽다",
+                                "MAKE",
                                 style: TextStyle(
-                                  fontSize: 100,
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.bold,
                                   color:  _isHoveringBox1
                                       ? AppColors.mainColor
                                       : AppColors.backgroundColor,
                                 ),
                               ),
+                              const SizedBox(
+                                height: 20,
+                              )
+                              ,
                               Text(
-                                "Folio를 이용해서",
+                                "By Folio",
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 40,
                                   color:  _isHoveringBox1
                                       ? AppColors.mainColor
                                       : AppColors.backgroundColor,
@@ -114,23 +119,27 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
                                 : {}  // 이미 일반 상태이므로 아무것도 하지 않음
                           },
                         child: SizedBox(
-                          height: 500,
+                          height: 300,
                           width: containerWidth,
                           child: Column(
                             children: [
                               Text(
-                                "빠르다",
+                                "DEV",
                                 style: TextStyle(
-                                  fontSize: 100,
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.bold,
                                   color:  _isHoveringBox2
                                       ? AppColors.mainColor
                                       : AppColors.backgroundColor,
                                 ),
                               ),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               Text(
-                                "포트폴리오를 만들어보자",
+                                "Using Flutter",
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 40,
                                   color:  _isHoveringBox2
                                       ? AppColors.mainColor
                                       : AppColors.backgroundColor,
@@ -158,23 +167,27 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
                                 : {}  // 이미 일반 상태이므로 아무것도 하지 않음
                           },
                         child: SizedBox(
-                          height: 500,
+                          height: 300,
                           width: containerWidth,
                           child: Column(
                             children: [
                               Text(
-                                "간편하다",
+                                "PORTFOLIO",
                                 style: TextStyle(
-                                  fontSize: 100,
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.bold,
                                   color:  _isHoveringBox3
                                       ? AppColors.mainColor
                                       : AppColors.backgroundColor,
                                 ),
                               ),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               Text(
-                                "포트폴리오를 만들어보자",
+                                "Simply",
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 40,
                                   color:  _isHoveringBox3
                                       ? AppColors.mainColor
                                       : AppColors.backgroundColor,
@@ -187,9 +200,37 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
                     ],
                   ),
                   SizedBox(
-                    height: constraints.maxHeight * 1,
-                    width: constraints.maxWidth,
+                    height: Get.height * 0.05,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                    SizedBox(
+                      height: 500,
+                      width: containerWidth,
+                      child: Image.asset(
+                        'assets/image/foliologo.png',
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                      SizedBox(
+                        height: 500,
+                        width: containerWidth,
+                        child: Image.asset(
+                          'assets/image/flutterlogo.png',
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 500,
+                        width: containerWidth,
+                        child: Image.asset(
+                          'assets/image/pdflogo.png',
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

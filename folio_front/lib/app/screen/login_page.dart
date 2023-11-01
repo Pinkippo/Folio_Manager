@@ -58,7 +58,11 @@ class LoginPage extends GetView<LoginController> {
   login() async {
 
     if(Get.find<LoginController>().email == RxString('') || Get.find<LoginController>().password == RxString('')) {
-      Get.snackbar('로그인 요청 실패', '아이디와 비밀번호를 확인해주세요.');
+      Get.snackbar(
+          '로그인 요청 실패',
+          '아이디와 비밀번호를 확인해주세요.',
+          backgroundColor: Colors.red,
+          snackPosition: SnackPosition.BOTTOM);
       return;
     }
 
@@ -67,7 +71,11 @@ class LoginPage extends GetView<LoginController> {
         storage.write(key: 'jwt', value: value);
         Get.offAllNamed('/');
       } else {
-        Get.snackbar('로그인 실패', '아이디와 비밀번호를 확인해주세요.');
+        Get.snackbar(
+            '로그인 실패',
+            '아이디와 비밀번호를 확인해주세요.',
+            backgroundColor: Colors.red,
+            snackPosition: SnackPosition.BOTTOM);
       }
     });
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:folio_front/app/screen/board_page.dart';
 import 'package:folio_front/app/screen/explain_page.dart';
 import 'package:folio_front/app/screen/portfolio_page.dart';
 import 'package:folio_front/common/app_colors.dart';
@@ -61,6 +62,26 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         ],
       ),
     ),
+    const Tab(
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20,
+          ),
+          Text(
+            '요청사항',
+            style: TextStyle(
+              color: AppColors.mainColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+        ],
+      ),
+    ),
   ];
 
   @override
@@ -89,7 +110,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        toolbarHeight: Get.height * 0.08,
+        toolbarHeight: 64,
         title: Row(
           children: [
             SizedBox(
@@ -99,14 +120,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
               onTap: () {
                 Get.offAllNamed('/');
               },
-              child: const Text(
-                'Folio',
-                style: TextStyle(
-                  fontFamily: 'LS',
-                  fontSize: 54,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.mainColor,
-                ),
+              child: Image.asset(
+                'assets/image/foliologo.png',
+                height: 74,
               ),
             ),
           ],
@@ -144,6 +160,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         children: const[
           ExplainPage(),
           PortfolioPage(),
+          BoardPage()
         ],
       ),
     );

@@ -76,10 +76,14 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
                 child: GestureDetector(
                   onTap: () {
                     if(jwtToken == '') {
-                      Get.snackbar('로그인 필요', '로그인 후 이용해주세요.');
+                      Get.snackbar(
+                          '로그인 필요',
+                          '로그인 후 이용해주세요.',
+                          backgroundColor: Colors.red,
+                          snackPosition: SnackPosition.BOTTOM);
                       Get.toNamed('/login');
                     } else {
-                      Get.toNamed('/write');
+                      Get.toNamed('/create');
                     }
                   },
                   child: Stack(
