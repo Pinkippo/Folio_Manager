@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/folio_controller.dart';
+import 'package:folio_front/app/widget/folio_education.dart';
 import 'package:folio_front/app/widget/folio_myinfo.dart';
 import 'package:folio_front/app/widget/folio_name.dart';
 import 'package:folio_front/app/widget/gradient_button.dart';
@@ -24,7 +25,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
   Map<String, bool> sectionVisibility = {
     '이력서 제목': true,
     '개인정보': true,
-    // '학력 및 이수 교육': true,
+    '학력 및 이수 교육': true,
     // '자격증': true,
     // '경력': true,
     // '수상기록': true,
@@ -154,7 +155,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                       case '개인정보':
                         return const FolioMyInfo();
                       case '학력 및 이수 교육':
-                        return const Placeholder();
+                        return const FolioEducation();
                       case '자격증':
                         return const Placeholder();
                       case '경력':

@@ -153,7 +153,6 @@ class FolioMyInfo extends GetView<FolioController> {
             onChanged: controller.updateFolioName,
           ),
         ),
-        const SizedBox(height: 30),
       ],
     );
   }

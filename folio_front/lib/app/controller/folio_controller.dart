@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:folio_front/app/widget/folio_education_info.dart';
 import 'package:folio_front/data/repository/folio_repository.dart';
 import 'package:get/get.dart';
 
@@ -22,9 +23,9 @@ class FolioController extends GetxController{
 
   final RxString folioMyCareer = ''.obs; // 포트폴리오 작성자 근무 년차
 
-  // 본인 간단 소개
-  final RxString folioMyIntro = ''.obs;
+  final RxString folioMyIntro = ''.obs; // 포트폴리오 소개
 
+  final RxList<FolioEducationItem> folioEducationList = <FolioEducationItem>[].obs; // 포트폴리오 학력 정보
 
   /// 포트폴리오 내용 변경 메서드
   void updateFolioName(String value) {
@@ -54,6 +55,20 @@ class FolioController extends GetxController{
   void updateFolioMyIntro(String value) {
     folioMyIntro.value = value;
   }
+
+  void updateFolioEducation(FolioEducationItem value) {
+    folioEducationList.add(value);
+  }
+
+  void removeFolioEducation(FolioEducationItem value) {
+    folioEducationList.remove(value);
+  }
+
+  void updateName(String value) {
+
+  }
+
+
 
   /// 포트폴리오 저장 메서드
   void saveFolio() async {
