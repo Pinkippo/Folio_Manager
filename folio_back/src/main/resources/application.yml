@@ -16,7 +16,9 @@ spring: # 스프링 설정
     open-in-view: true # JPA 영속성 컨텍스트를 View까지 유지
     properties:
       hibernate:
-        format_sql: true # SQL 예쁘게 출력
+        format_sql: false # SQL 예쁘게 출력
+      properties:
+        hibernate.default_batch_fetch_size: 1000
 
 
   datasource: # 데이터베이스 연결 설정
