@@ -1,6 +1,7 @@
 package com.spring.folio_back.repository.board;
 
 import com.spring.folio_back.entity.Board;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -9,6 +10,6 @@ import java.util.List;
  */
 public interface BoardRepositoryCustom {
 
-    List<Board> ReadBoardByDsl();
+    List<Board> ReadBoardByDsl(PageRequest pageRequest);
 
 }

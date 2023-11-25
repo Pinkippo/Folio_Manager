@@ -12,6 +12,7 @@ import com.spring.folio_back.repository.board.BoardRepository;
 import com.spring.folio_back.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +46,8 @@ public class BoardService {
         return true;
     }
 
-    public List<SpecBoardResponseDTO> ReadBoard(){
-        List<Board> boardEntities = boardRepository.ReadBoardByDsl();
+    public List<SpecBoardResponseDTO> ReadBoard(PageRequest pageRequest){
+        List<Board> boardEntities = boardRepository.ReadBoardByDsl(pageRequest);
         List<SpecBoardResponseDTO> result = new ArrayList<>();
 
         for (Board board: boardEntities) {

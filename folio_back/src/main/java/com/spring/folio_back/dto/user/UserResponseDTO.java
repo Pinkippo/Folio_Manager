@@ -13,7 +13,6 @@ public class UserResponseDTO {
     private String email;
 
     private String nickname;
-
     public UserResponseDTO(User user){
         this.uid = user.getUid();
         this.email = user.getEmail();

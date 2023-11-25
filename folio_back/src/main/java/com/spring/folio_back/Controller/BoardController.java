@@ -7,6 +7,7 @@ import com.spring.folio_back.httpReturn.DefaultRes;
 import com.spring.folio_back.httpReturn.ResponseMessage;
 import com.spring.folio_back.httpReturn.StatusCode;
 import com.spring.folio_back.service.BoardService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +41,17 @@ public class BoardController {
 
     // 전체 글 조회
     @GetMapping("/read")
-    public ResponseEntity<DefaultRes<List<SpecBoardResponseDTO>>> ReadBoard(){
-        List<SpecBoardResponseDTO> spec = boardService.ReadBoard();
-        if(spec != null){
-            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.READ_SUCCESS, spec), HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
+    public ResponseEntity<DefaultRes<List<SpecBoardResponseDTO>>> ReadBoard(@RequestParam("page") Integer page, @RequestParam(value = "size", defaultValue = "20", required = false) Integer size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        try {
+            List<SpecBoardResponseDTO> spec = boardService.ReadBoard(pageRequest);
+            if(spec != null){
+                return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.READ_SUCCESS, spec), HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(DefaultRes.res(StatusCode.OK,ResponseMessage.NOT_CREATE_BOARD, null), HttpStatus.OK);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(DefaultRes.res(StatusCode.DB_ERROR,ResponseMessage.DB_ERROR, null), HttpStatus.OK);
         }
     }
 

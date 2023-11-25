@@ -3,6 +3,7 @@ package com.spring.folio_back.repository.board;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.spring.folio_back.entity.Board;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,9 +21,12 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Board> ReadBoardByDsl() {
+    public List<Board> ReadBoardByDsl(PageRequest pageRequest) {
         return jpaQueryFactory.selectFrom(board)
                 .leftJoin(board.comments, comment).fetchJoin()
+                .orderBy(board.bid.desc())
+                .offset(pageRequest.getOffset())
+                .limit(pageRequest.getPageSize())
                 .fetch();
     }
 
