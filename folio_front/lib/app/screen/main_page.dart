@@ -157,10 +157,10 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
       ),
       body: TabBarView(
         controller: tabController,
-        children: const[
+        children: const [
           ExplainPage(),
           PortfolioPage(),
-          BoardPage()
+          BoardPage(),
         ],
       ),
     );

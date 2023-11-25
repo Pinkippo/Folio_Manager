@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/login_controller.dart';
+import 'package:folio_front/app/screen/main_page.dart';
 import 'package:folio_front/app/widget/gradient_button.dart';
 import 'package:folio_front/app/widget/login_field.dart';
 import 'package:folio_front/common/app_colors.dart';
@@ -69,7 +70,7 @@ class LoginPage extends GetView<LoginController> {
     await Get.find<LoginController>().login().then((value) {
       if (value != '') {
         storage.write(key: 'jwt', value: value);
-        Get.offAllNamed('/');
+        Get.off(() => const MainPage());
       } else {
         Get.snackbar(
             '로그인 실패',
