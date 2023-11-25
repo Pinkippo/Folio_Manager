@@ -67,9 +67,11 @@ class LoginPage extends GetView<LoginController> {
       return;
     }
 
-    await Get.find<LoginController>().login().then((value) {
-      if (value != '') {
-        storage.write(key: 'jwt', value: value);
+    await Get.find<LoginController>().login().then((value) async {
+      if (value.jwtToken != '') {
+        await storage.write(key: 'jwt', value: value.jwtToken);
+        await storage.write(key: 'uid', value : value.uid.toString());
+        await storage.write(key: 'nickname', value : value.nickname);
         Get.off(() => const MainPage());
       } else {
         Get.snackbar(

@@ -1,3 +1,5 @@
+import 'package:folio_front/data/model/comment_request_model.dart';
+
 import '../model/board_response_model.dart';
 import '../provider/api.dart';
 
@@ -11,6 +13,11 @@ class BoardRepository{
     return MyApiClient().getMainList(
         pageNumber, pageSize
     );
+  }
+
+  /// 댓글 등록
+  Future<bool> addComment (CommentRequestModel commentRequestModel) async {
+    return MyApiClient().addComment(commentRequestModel);
   }
 
 

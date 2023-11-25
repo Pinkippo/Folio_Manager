@@ -100,10 +100,10 @@ class BoardPage extends GetView<BoardController> {
                                     // 댓글 작성
                                     Row(
                                       children: [
-                                        const Expanded(
+                                        Expanded(
                                           child: TextField(
                                             autofocus: true,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: OutlineInputBorder(
                                                 borderSide: BorderSide(color: Colors.white), // 윤곽선 색상을 흰색으로 지정
                                               ),
@@ -113,7 +113,11 @@ class BoardPage extends GetView<BoardController> {
                                               labelText: '댓글을 입력하세요',
                                               labelStyle: TextStyle(color: Colors.white), // 라벨 텍스트 색상을 흰색으로 지정
                                             ),
-                                            style: TextStyle(color: Colors.white), // 입력된 텍스트 색상을 흰색으로 지정
+                                            style: const TextStyle(color: Colors.white), // 입력된 텍스트 색상을 흰색으로 지정
+                                            controller: TextEditingController(text: controller.commentContent.value),
+                                            onChanged: (text) {
+                                              controller.updateCommentContent(text);
+                                            },
                                           ),
                                         ),
                                         const SizedBox(width: 16),
@@ -123,8 +127,19 @@ class BoardPage extends GetView<BoardController> {
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors.white
                                             ),
-                                            onPressed: () {
-                                              // 댓글 작성 버튼 눌렀을 때의 동작 추가
+                                            onPressed: () async {
+                                              controller.addComment(board.bid).then((value){
+                                                if(value){
+                                                  Get.snackbar(
+                                                    '댓글 등록 성공',
+                                                    '댓글이 등록되었습니다.',
+                                                    snackPosition: SnackPosition.BOTTOM,
+                                                    backgroundColor: Colors.greenAccent,
+                                                    colorText: Colors.white,
+                                                  );
+                                                  controller.clearCommentContent();
+                                                }
+                                              });
                                             },
                                             child: const Text('작성', style: TextStyle(color: Colors.black , fontWeight: FontWeight.bold)),
                                           ),

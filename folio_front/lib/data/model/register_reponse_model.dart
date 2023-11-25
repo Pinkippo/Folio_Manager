@@ -4,19 +4,22 @@ import 'package:http/http.dart' as http;
 class RegisterResponseModel {
   bool success;
   String jwtToken;
-  String username;
+  String nickname;
+  int uid;
 
   RegisterResponseModel({
     required this.success,
     required this.jwtToken,
-    required this.username,
+    required this.nickname,
+    required this.uid,
   });
 
   factory RegisterResponseModel.fromJson(Map<String, dynamic> json) {
     return RegisterResponseModel(
       success: true,
       jwtToken: json['jwtToken'],
-      username: json['username'],
+      nickname: json['nickname'],
+      uid: json['uid'],
     );
   }
 }
