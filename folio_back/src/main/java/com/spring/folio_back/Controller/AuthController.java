@@ -1,5 +1,6 @@
 package com.spring.folio_back.Controller;
 
+import com.spring.folio_back.entity.User;
 import com.spring.folio_back.jwt.JwtHelper;
 import com.spring.folio_back.dto.JwtRequest;
 import com.spring.folio_back.dto.JwtResponse;
@@ -47,13 +48,14 @@ public class AuthController {
     public JwtResponse login(@RequestBody JwtRequest request) {
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        User userDetails = userDetailsService.loadUserByUsername(request.getEmail());
 
         String token = this.helper.generateToken(userDetails);
 
         JwtResponse response = JwtResponse.builder()
                 .jwtToken(token)
-                .username(userDetails.getUsername()).build();
+                .uid(userDetails.getUid())
+                .nickname(userDetails.getNickname()).build();
         return response;
     }
 
@@ -68,8 +70,7 @@ public class AuthController {
             String token = this.helper.generateToken(userDetails);
 
             JwtResponse response = JwtResponse.builder()
-                    .jwtToken(token)
-                    .username(userDetails.getUsername()).build();
+                    .jwtToken(token).build();
 
             return new ResponseEntity<>(response, HttpStatus.OK);
     }

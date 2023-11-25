@@ -12,7 +12,8 @@ import lombok.Data;
 public class JwtResponse {
 
     private String jwtToken;
-    private String username;
+    private String nickname;
+    private Long uid;
 
 
 
