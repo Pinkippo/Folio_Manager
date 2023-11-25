@@ -32,8 +32,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             '안내말',
             style: TextStyle(
               color: AppColors.mainColor,
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
+              fontSize: 20,
             ),
           ),
           SizedBox(
@@ -52,8 +51,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             '포트폴리오',
             style: TextStyle(
               color: AppColors.mainColor,
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
+              fontSize: 20,
             ),
           ),
           SizedBox(
@@ -72,8 +70,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             '요청사항',
             style: TextStyle(
               color: AppColors.mainColor,
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
+              fontSize: 20,
             ),
           ),
           SizedBox(

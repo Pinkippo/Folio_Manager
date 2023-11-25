@@ -7,9 +7,9 @@ import 'package:http/http.dart' as http;
 class BoardRepository{
 
   /// 메인 리스트 호출
-  Future<List<BoardResponseModel>> getMainList (String token, int pageNumber, int pageSize) async {
+  Future<List<BoardResponseModel>> getMainList (int pageNumber, int pageSize) async {
     return MyApiClient().getMainList(
-        pageNumber, pageSize, token
+        pageNumber, pageSize
     );
   }
 

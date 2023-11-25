@@ -19,15 +19,6 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: (context, child) {
-        final MediaQueryData data = MediaQuery.of(context);
-        return MediaQuery(
-          data: data.copyWith(textScaleFactor: 1.0),
-          child: child!,
-        );
-      },
-      home: const MainPage(),
-    );
+    return const MainPage();
   }
 }

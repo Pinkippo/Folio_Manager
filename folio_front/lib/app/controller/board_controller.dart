@@ -3,6 +3,8 @@ import 'package:folio_front/data/model/board_response_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/model/comment_response_model.dart';
+import '../../data/model/user_response_model.dart';
 import '../../data/repository/board_repository.dart';
 
 class BoardController extends GetxController {
@@ -19,22 +21,57 @@ class BoardController extends GetxController {
 
   @override
   void onInit() async {
-    addBoardList();
+    addMockBoard();
+    //addBoardList();
     super.onInit();
+  }
+
+  /// Test 데이터 추가
+  Future<void> addMockBoard() async {
+    for (int i = 0; i < 20; i++) {
+      boardList.add(BoardResponseModel(
+        bid: i,
+        userResponseDTO: UserResponseModel(
+          uid: i,
+          nickname: '유저 $i',
+          email: '이메일 $i',
+        ),
+        writeDate: DateTime.now(),
+        title: '제목sfasdfasfasdfasfasdfasfdasdfaadfadfasdfasdfadfadfasfdasfdasfasdfasdfasfasdf $i',
+        content: '내용 $i',
+        view: i,
+        comments: [
+          CommentResponseModel(
+            content: '댓글 $i',
+            nickname: '유저 $i',
+            writeDate: DateTime.now(),
+          ),
+          CommentResponseModel(
+            content: '댓글 $i',
+            nickname: '유저 $i',
+            writeDate: DateTime.now(),
+          ),
+          CommentResponseModel(
+            content: '댓글 $i',
+            nickname: '유저 $i',
+            writeDate: DateTime.now(),
+          )
+        ],
+      ));
+    }
   }
 
   /// 게시글 리스트 추가 -
   Future<void> addBoardList() async {
-    String? token = await storage.read(key: 'jwt');
 
-    print('토큰${token!}');
     print(pageNumber.value);
     print(pageSize.value);
 
-    List<BoardResponseModel> tempList = await BoardRepository().getMainList(token! ,pageNumber.value, pageSize.value);
+    List<BoardResponseModel> tempList = await BoardRepository().getMainList(pageNumber.value, pageSize.value);
     boardList.addAll(tempList);
 
     print(boardList.length);
+
   }
 
 

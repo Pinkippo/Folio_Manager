@@ -77,7 +77,7 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
                               Text(
                                 "MAKE",
                                 style: TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 70,
                                   fontWeight: FontWeight.bold,
                                   color:  _isHoveringBox1
                                       ? AppColors.mainColor
@@ -126,7 +126,7 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
                               Text(
                                 "DEV",
                                 style: TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 70,
                                   fontWeight: FontWeight.bold,
                                   color:  _isHoveringBox2
                                       ? AppColors.mainColor
@@ -174,7 +174,7 @@ class _ExplainPageState extends State<ExplainPage> with SingleTickerProviderStat
                               Text(
                                 "PORTFOLIO",
                                 style: TextStyle(
-                                  fontSize: 80,
+                                  fontSize: 70,
                                   fontWeight: FontWeight.bold,
                                   color:  _isHoveringBox3
                                       ? AppColors.mainColor

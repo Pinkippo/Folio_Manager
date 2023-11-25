@@ -22,8 +22,9 @@ class MyApiClient {
       body: jsonEncode(requestModel.toJson()),
     );
 
+
     if (response.statusCode == 200) {
-      RegisterResponseModel responseModel = RegisterResponseModel.fromJson(jsonDecode(response.body));
+      RegisterResponseModel responseModel = RegisterResponseModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
       return responseModel;
     } else {
       throw Exception('Failed to register');
@@ -43,7 +44,7 @@ class MyApiClient {
     );
 
     if (response.statusCode == 200) {
-      return  RegisterResponseModel.fromJson(jsonDecode(response.body));
+      return  RegisterResponseModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     } else if(response.statusCode == 401){
       return RegisterResponseModel(success: false, jwtToken: '', username: '');
     } else {
@@ -53,7 +54,7 @@ class MyApiClient {
   }
 
   /// 메인 리스트 조회
-  Future<List<BoardResponseModel>> getMainList(int pageNumber, int pageSize, String token) async {
+  Future<List<BoardResponseModel>> getMainList(int pageNumber, int pageSize) async {
     final url = Uri.parse('$baseUrl/board/read?page=$pageNumber&size=$pageSize');
 
     final response = await http.get(
@@ -61,7 +62,6 @@ class MyApiClient {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
       },
     );
 
@@ -70,7 +70,7 @@ class MyApiClient {
 
     if (response.statusCode == 200) {
       final List<BoardResponseModel> boardList = [];
-      final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+      final Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
       if (jsonResponse.containsKey('data')) {
         final List<dynamic> jsonList = jsonResponse['data'];
