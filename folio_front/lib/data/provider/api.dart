@@ -47,7 +47,7 @@ class MyApiClient {
     if (response.statusCode == 200) {
       return  RegisterResponseModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     } else if(response.statusCode == 401){
-      return RegisterResponseModel(success: false, jwtToken: '', nickname: '', uid: 0);
+      return RegisterResponseModel( jwtToken: '', nickname: '', uid: 0);
     } else {
       throw Exception('Failed to register');
       // TODO : 추후 에러 처리
@@ -88,6 +88,7 @@ class MyApiClient {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
         );
         throw Exception('Failed to get main list');
       }
@@ -98,6 +99,7 @@ class MyApiClient {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
       );
       throw Exception('Failed to get main list');
     }
@@ -132,6 +134,7 @@ class MyApiClient {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
         );
         return jsonResponse['data'];
       }
@@ -142,6 +145,7 @@ class MyApiClient {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
       );
       return false;
     }

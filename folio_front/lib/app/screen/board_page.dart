@@ -136,6 +136,7 @@ class BoardPage extends GetView<BoardController> {
                                                     snackPosition: SnackPosition.BOTTOM,
                                                     backgroundColor: Colors.greenAccent,
                                                     colorText: Colors.white,
+                                                    margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
                                                   );
                                                   controller.clearCommentContent();
                                                 }
@@ -166,9 +167,14 @@ class BoardPage extends GetView<BoardController> {
                                                 children: [
                                                   const Icon(Icons.person, color: Colors.white),
                                                   const SizedBox(width: 8),
+                                                  (board.comments[index].nickname == "관리자")?
                                                   Text(
                                                     board.comments[index].nickname,
-                                                    style: const TextStyle(color: Colors.white), // 텍스트 색상을 검정색으로 지정
+                                                    style: const TextStyle(color: Colors.redAccent),
+                                                  ) :
+                                                  Text(
+                                                    board.comments[index].nickname,
+                                                    style: const TextStyle(color: Colors.white),
                                                   ),
                                                 ],
                                               ),

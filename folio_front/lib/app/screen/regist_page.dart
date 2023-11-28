@@ -57,7 +57,8 @@ class RegisterPage extends GetView<LoginController> {
           '회원가입 요청 실패',
           '아이디와 비밀번호를 입력했는지 확인해주세요.',
           backgroundColor: Colors.red,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),);
       return;
     }
     if(!Get.find<LoginController>().checkPassword()) {
@@ -65,7 +66,9 @@ class RegisterPage extends GetView<LoginController> {
           '회원가입 요청 실패',
           '비밀번호가 일치하지 않습니다.',
           backgroundColor: Colors.red,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+      );
       return;
     }
 
@@ -82,7 +85,9 @@ class RegisterPage extends GetView<LoginController> {
             '회원가입 실패',
             '회원가입에 실패하였습니다. 다시 시도해주세요.',
             backgroundColor: Colors.red,
-            snackPosition: SnackPosition.BOTTOM);
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+        );
       }
     });
 

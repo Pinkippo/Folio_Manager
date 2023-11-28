@@ -80,7 +80,9 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
                           '로그인 필요',
                           '로그인 후 이용해주세요.',
                           backgroundColor: Colors.red,
-                          snackPosition: SnackPosition.BOTTOM);
+                          snackPosition: SnackPosition.BOTTOM,
+                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+                      );
                       Get.toNamed('/login');
                     } else {
                       Get.toNamed('/create');

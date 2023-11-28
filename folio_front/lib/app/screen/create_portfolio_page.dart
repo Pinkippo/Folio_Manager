@@ -48,6 +48,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
         '로그인 후 이용해주세요.',
         backgroundColor: Colors.red,
         snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50)
       );
     }
   }

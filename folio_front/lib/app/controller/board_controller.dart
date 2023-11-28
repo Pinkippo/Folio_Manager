@@ -61,11 +61,12 @@ class BoardController extends GetxController {
 
     if(commentContent.value == '') {
       Get.snackbar(
-        '댓글 등록 실패',
-        '댓글을 입력해주세요.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.redAccent,
-        colorText: Colors.white,
+          '댓글 등록 실패',
+          '댓글을 입력해주세요.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
       );
       return false;
     }
@@ -77,6 +78,7 @@ class BoardController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
       );
       Get.toNamed('/login');
       return false;

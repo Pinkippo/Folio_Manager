@@ -29,7 +29,7 @@ class LoginController extends GetxController{
   Future<RegisterResponseModel> login() async {
     final RegisterResponseModel response = await authRepository.login(RegisterRequestModel.emailPassword(email: email.value, password: password.value));
     registerResponse.value = response;
-    return (response.success) ? response : RegisterResponseModel(success: false, jwtToken: '', nickname: '', uid: 0);
+    return (response.jwtToken.isNotEmpty) ? response : RegisterResponseModel(jwtToken: '', nickname: '', uid: 0);
   }
 
   // 회원가입
