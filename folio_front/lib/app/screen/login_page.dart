@@ -64,7 +64,7 @@ class LoginPage extends GetView<LoginController> {
           '아이디와 비밀번호를 확인해주세요.',
           backgroundColor: Colors.red,
           snackPosition: SnackPosition.BOTTOM,
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       );
       return;
     }
@@ -81,7 +81,7 @@ class LoginPage extends GetView<LoginController> {
             '아이디와 비밀번호를 확인해주세요.',
             backgroundColor: Colors.red,
             snackPosition: SnackPosition.BOTTOM,
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         );
       }
     });

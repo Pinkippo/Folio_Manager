@@ -5,6 +5,7 @@ import 'package:folio_front/data/model/register_request_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/board_request_model.dart';
 import '../model/board_response_model.dart';
 import '../model/comment_request_model.dart';
 
@@ -51,6 +52,52 @@ class MyApiClient {
     } else {
       throw Exception('Failed to register');
       // TODO : 추후 에러 처리
+    }
+  }
+
+  /// 요청사항 작성
+  Future<bool> writeBoard(BoardRequestModel boardRequestModel, String jwtToken) async {
+    final url = Uri.parse('$baseUrl/board/write');
+
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(boardRequestModel.toJson()),
+    );
+
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+
+      if (jsonResponse['data'] == true) {
+        return jsonResponse['data'];
+      } else {
+        Get.snackbar(
+          '요청사항 작성 실패',
+          jsonResponse['responseMessage'],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+        );
+        return jsonResponse['data'];
+      }
+    } else {
+      Get.snackbar(
+        '요청사항 작성 실패',
+        '서버 상태가 불안정합니다. 잠시 후 다시 시도해주세요.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+      );
+      return false;
     }
   }
 
