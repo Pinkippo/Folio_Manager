@@ -16,6 +16,7 @@ void main() {
         );
       },
       debugShowCheckedModeBanner: false,
+
       initialRoute: Routes.initial,
       getPages: AppPages.pages,
       theme: appThemeData,

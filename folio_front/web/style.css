@@ -21,7 +21,7 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
-    animation: sk-chase 2.5s infinite linear both;
+    animation: sk-chase 2.5s;
 }
 
 .sk-chase-dot {
@@ -30,7 +30,7 @@ body {
     position: absolute;
     left: 0;
     top: 0;
-    animation: sk-chase-dot 2.0s infinite ease-in-out both;
+    animation: sk-chase-dot 2.0s;
 }
 
 .sk-chase-dot:before {

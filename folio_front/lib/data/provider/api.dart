@@ -9,7 +9,7 @@ import '../model/board_request_model.dart';
 import '../model/board_response_model.dart';
 import '../model/comment_request_model.dart';
 
-const baseUrl = 'http://localhost:80';
+const baseUrl = 'http://192.168.0.9:80';
 
 class MyApiClient {
 
