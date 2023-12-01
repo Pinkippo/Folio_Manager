@@ -81,7 +81,7 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
                           '로그인 후 이용해주세요.',
                           backgroundColor: Colors.red,
                           snackPosition: SnackPosition.BOTTOM,
-                          margin: const EdgeInsets.fromLTRB(20, 0, 100, 20),
+                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                       );
                       Get.toNamed('/login');
                     } else {

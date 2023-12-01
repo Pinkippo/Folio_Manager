@@ -84,7 +84,7 @@ class MyApiClient {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white,
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         );
         return jsonResponse['data'];
       }
@@ -95,7 +95,7 @@ class MyApiClient {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       );
       return false;
     }
@@ -135,7 +135,7 @@ class MyApiClient {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white,
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         );
         throw Exception('Failed to get main list');
       }
@@ -146,7 +146,7 @@ class MyApiClient {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       );
       throw Exception('Failed to get main list');
     }
@@ -181,7 +181,7 @@ class MyApiClient {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white,
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         );
         return jsonResponse['data'];
       }
@@ -192,7 +192,7 @@ class MyApiClient {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent,
         colorText: Colors.white,
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       );
       return false;
     }
