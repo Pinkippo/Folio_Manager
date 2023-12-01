@@ -13,6 +13,7 @@ class FolioName extends GetView<FolioController> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const SizedBox(height: 30),
         /// 이력서 이름 입력
         ConstrainedBox(
           constraints: BoxConstraints(
@@ -21,20 +22,20 @@ class FolioName extends GetView<FolioController> {
           child: TextFormField(
             decoration: InputDecoration(
               hintText: '이력서 이름',
-              contentPadding: const EdgeInsets.all(27),
+              contentPadding: const EdgeInsets.all(30),
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: AppColors.mainColor,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: AppColors.mainColor,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
             ),
             onChanged: controller.updateFolioName,
@@ -48,21 +49,21 @@ class FolioName extends GetView<FolioController> {
           ),
           child: TextFormField(
             decoration: InputDecoration(
-              hintText: '자신을 가장 잘 표현할 수 있는 한줄',
-              contentPadding: const EdgeInsets.all(27),
+              hintText: '이력서 부제       ex) 매일매일 노력하는 개발자 ㅇㅇㅇ 입니다!',
+              contentPadding: const EdgeInsets.all(30),
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: AppColors.mainColor,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: AppColors.mainColor,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
             ),
             onChanged: controller.updateFolioSummary,
