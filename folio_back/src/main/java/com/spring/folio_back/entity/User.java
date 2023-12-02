@@ -41,6 +41,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Board> boards;
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Resume> resumes;
 
     /**
      * UserDetails 인터페이스의 메소드 구현
