@@ -51,7 +51,7 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
       builder: (BuildContext context, Widget? child) {
         return Scaffold(
           backgroundColor:
-          ColorTween(begin: AppColors.backgroundColor, end: Colors.black87)
+          ColorTween(begin: AppColors.backgroundColor, end: AppColors.mainColor)
               .evaluate(_controller),
           body: Stack(
             children : [

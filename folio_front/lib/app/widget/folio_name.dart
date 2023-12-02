@@ -19,54 +19,82 @@ class FolioName extends GetView<FolioController> {
           constraints: BoxConstraints(
             maxWidth: Get.width * 0.6,
           ),
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: '이력서 이름',
-              contentPadding: const EdgeInsets.all(30),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '이력서 제목',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                   color: AppColors.mainColor,
-                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(20),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+              const SizedBox(height: 5),
+              const Text(
+                '이력서 이름을 입력해주세요.',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                   color: AppColors.mainColor,
-                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-            onChanged: controller.updateFolioName,
-          ),
-        ),
-        const SizedBox(height: 30),
-        /// 이력서 한줄 요약 입력
-        ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: Get.width * 0.6,
-          ),
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: '이력서 부제       ex) 매일매일 노력하는 개발자 ㅇㅇㅇ 입니다!',
-              contentPadding: const EdgeInsets.all(30),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: AppColors.mainColor,
-                  width: 2,
+              const SizedBox(height: 15),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: Get.width * 0.6,
                 ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: AppColors.mainColor,
-                  width: 2,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: '이력서 이름',
+                    contentPadding: const EdgeInsets.all(30),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: AppColors.mainColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: AppColors.mainColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onChanged: controller.updateFolioName,
                 ),
-                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-            onChanged: controller.updateFolioSummary,
+              const SizedBox(height: 30),
+              /// 이력서 한줄 요약 입력
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: Get.width * 0.6,
+                ),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: '이력서 부제       ex) 매일매일 노력하는 개발자 ㅇㅇㅇ 입니다!',
+                    contentPadding: const EdgeInsets.all(30),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: AppColors.mainColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: AppColors.mainColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onChanged: controller.updateFolioSummary,
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 30),

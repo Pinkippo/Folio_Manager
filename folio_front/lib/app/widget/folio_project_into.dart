@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:folio_front/app/controller/board_controller.dart';
-import 'package:folio_front/app/controller/folio_controller.dart';
-import 'package:folio_front/common/app_colors.dart';
 import 'package:get/get.dart';
 
-class FolioEducationItem extends GetView<FolioController> {
-  const FolioEducationItem({
+import '../../common/app_colors.dart';
+import '../controller/folio_controller.dart';
+
+class FolioProjectItem extends GetView<FolioController> {
+  const FolioProjectItem({
     required this.name,
     required this.period,
+    required this.devStack,
     required this.content,
-    required this.special,
     Key? key,
   }) : super(key: key);
 
   final String name;
   final String period;
+  final List<String> devStack;
   final String content;
-  final String special;
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +61,8 @@ class FolioEducationItem extends GetView<FolioController> {
               const SizedBox(width: 20),
               IconButton(
                 onPressed: () {
-                  controller.folioEducationList.removeWhere(
-                    (element) => element.name == name,
+                  controller.folioProjectList.removeWhere(
+                        (element) => element.name == name,
                   );
                 },
                 icon: const Icon(
@@ -73,23 +73,22 @@ class FolioEducationItem extends GetView<FolioController> {
             ],
           ),
           const SizedBox(height: 10),
+          // 개발스택 리스트
           Text(
-            content,
+            "개발 스택 : ${devStack.join(', ')}",
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.normal,
               color: AppColors.mainColor,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Text(
-            special,
-            maxLines: 3,
+            content,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.normal,
-              color: Colors.grey,
-
+              color: AppColors.mainColor,
             ),
           ),
         ],

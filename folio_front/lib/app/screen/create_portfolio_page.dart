@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/folio_controller.dart';
+import 'package:folio_front/app/widget/folio_dev_stack.dart';
 import 'package:folio_front/app/widget/folio_education.dart';
 import 'package:folio_front/app/widget/folio_myinfo.dart';
 import 'package:folio_front/app/widget/folio_name.dart';
@@ -8,6 +9,9 @@ import 'package:folio_front/app/widget/gradient_button.dart';
 import 'package:folio_front/app/widget/toggle_selection.dart';
 import 'package:folio_front/common/app_colors.dart';
 import 'package:get/get.dart';
+
+import '../widget/folio_award.dart';
+import '../widget/folio_project.dart';
 
 /// TODO : 왼쪽의 탭들로 오른쪽의 위젯들을 관리 / 오른쪽의 내용 위젯들은 GetView로 묶어서 상태를 관리
 class CreatePortfolioPage extends StatefulWidget {
@@ -25,11 +29,10 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
   Map<String, bool> sectionVisibility = {
     '이력서 제목': true,
     '개인정보': true,
+    '기술스택': true,
     '학력 및 이수 교육': true,
-    // '자격증': true,
-    // '경력': true,
-    // '수상기록': true,
-    // '프로젝트': true,
+    '기타사항': true,
+    '프로젝트': true,
   };
 
   @override
@@ -68,6 +71,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                 width: constraints.maxWidth * 0.15,
                 height: constraints.maxHeight,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height : constraints.maxHeight * 0.7,
@@ -94,6 +98,15 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                                   });
                                 },
                               ),
+                            // 빨간색 점은 필수 항목
+                            const SizedBox(height: 14),
+                            const Text(
+                              "빨가색 점은 필수 항목입니다.",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -157,16 +170,12 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                         return const FolioMyInfo();
                       case '학력 및 이수 교육':
                         return const FolioEducation();
-                      case '자격증':
-                        return const Placeholder();
-                      case '경력':
-                        return const Placeholder();
-                      case '수상기록':
-                        return const Placeholder();
+                      case '기술스택':
+                        return const FolioDevStack();
+                      case '기타사항':
+                        return const FolioAward();
                       case '프로젝트':
-                        return const Placeholder();
-                      default:
-                        return const Placeholder();
+                        return const FolioProject();
                     }
                   },
                 ),

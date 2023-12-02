@@ -24,6 +24,24 @@ class FolioMyInfo extends GetView<FolioController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Text(
+                '개인 정보',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.mainColor,
+                ),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                '이력서에 필요한 개인 정보를 입력해주세요.',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.mainColor,
+                ),
+              ),
+              const SizedBox(height: 15),
               Row(
                 children: [
                   /// 사용자 이름 입력

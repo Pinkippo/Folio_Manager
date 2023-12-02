@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:folio_front/app/controller/folio_controller.dart';
-import 'package:folio_front/common/app_colors.dart';
+import 'package:folio_front/app/widget/folio_award_info.dart';
 import 'package:get/get.dart';
+
+import '../../common/app_colors.dart';
 import 'folio_education_info.dart';
 
-class FolioEducation extends GetView<FolioController> {
-  const FolioEducation({Key? key}) : super(key: key);
+class FolioAward extends GetView<FolioController> {
+  const FolioAward({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,6 @@ class FolioEducation extends GetView<FolioController> {
     final nameController = TextEditingController();
     final periodController = TextEditingController();
     final contentController = TextEditingController();
-    final specialController = TextEditingController();
 
     final scrollController = ScrollController();
 
@@ -21,6 +22,7 @@ class FolioEducation extends GetView<FolioController> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const SizedBox(height: 30),
         ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: Get.width * 0.6,
@@ -28,25 +30,24 @@ class FolioEducation extends GetView<FolioController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 30),
               const Text(
-                '학력 및 이수 교육',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.mainColor,
-                ),
+              '기타 사항',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: AppColors.mainColor,
               ),
+            ),
               const SizedBox(height: 5),
               const Text(
-                '학력, 교육 이수 내역을 추가하여 풍부한 이력서를 완성해보세요!',
+                '자격증, 대외활동, 어학, 수상이력 등을 추가하여 풍부한 이력서를 완성해보세요!',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: AppColors.mainColor,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               Container(
                 constraints: BoxConstraints(
                   maxWidth: Get.width * 0.6,
@@ -69,14 +70,13 @@ class FolioEducation extends GetView<FolioController> {
                             },
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: controller.folioEducationList.map((item) {
+                              children: controller.folioLicenseList.map((item) {
                                 return Row(
                                   children: [
-                                    FolioEducationItem(
+                                    FolioAwardItem(
                                       name: item.name,
                                       period: item.period,
                                       content: item.content,
-                                      special: item.special,
                                     ),
                                     const SizedBox(width: 20),
                                   ],
@@ -128,7 +128,7 @@ class FolioEducation extends GetView<FolioController> {
                       controller: periodController,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(30),
-                        hintText: '기간',
+                        hintText: '날짜',
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                             color: AppColors.mainColor,
@@ -157,37 +157,7 @@ class FolioEducation extends GetView<FolioController> {
                   controller: contentController,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(30),
-                    hintText: '상세 내용',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: AppColors.mainColor,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: AppColors.mainColor,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: Get.width * 0.3 + 20,
-                ),
-                child: TextFormField(
-                  maxLength: 100,
-                  maxLines: 3,
-                  minLines: 3,
-                  controller: specialController,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(30),
-                    hintText: '특이사항',
+                    hintText: '내용',
                     enabledBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
                         color: AppColors.mainColor,
@@ -208,10 +178,7 @@ class FolioEducation extends GetView<FolioController> {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
-                  if (nameController.text == '' ||
-                      periodController.text == '' ||
-                      contentController.text == '' ||
-                      specialController.text == '') {
+                  if (nameController.text == '' || periodController.text == '' || contentController.text == '') {
                     Get.snackbar(
                       '항목 추가 실패',
                       '모든 항목을 입력해주세요.',
@@ -221,18 +188,16 @@ class FolioEducation extends GetView<FolioController> {
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                     );
                   } else {
-                    controller.folioEducationList.add(
-                      FolioEducationItem(
+                    controller.folioLicenseList.add(
+                      FolioAwardItem(
                         name: nameController.text,
                         period: periodController.text,
                         content: contentController.text,
-                        special: specialController.text,
                       ),
                     );
                     nameController.clear();
                     periodController.clear();
                     contentController.clear();
-                    specialController.clear();
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -244,10 +209,10 @@ class FolioEducation extends GetView<FolioController> {
                 ),
                 child: const Text('추가'),
               ),
-              const SizedBox(height: 30),
             ],
           ),
         ),
+        const SizedBox(height: 30),
       ],
     );
   }
