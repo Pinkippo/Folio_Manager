@@ -252,7 +252,16 @@ class FolioProject extends GetView<FolioController> {
                     periodController.clear();
                     detailController.clear();
                     controller.folioMySkill.clear();
-                  }else{
+                  } else if(controller.folioProjectList.length >= 4){
+                    Get.snackbar(
+                      '항목 추가 실패',
+                      '항목은 최대 4개까지 추가할 수 있습니다.',
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    );
+                  } else {
                     Get.snackbar(
                       '항목 추가 실패',
                       '모든 항목을 입력해주세요.',

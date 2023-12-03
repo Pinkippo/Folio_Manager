@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import '../model/board_request_model.dart';
 import '../model/board_response_model.dart';
 import '../model/comment_request_model.dart';
+import '../model/folio_reqeust_model.dart';
 
 const baseUrl = 'http://192.168.0.9:80';
 
@@ -188,6 +189,52 @@ class MyApiClient {
     } else {
       Get.snackbar(
         '댓글 등록 실패',
+        '서버 상태가 불안정합니다. 잠시 후 다시 시도해주세요.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+      );
+      return false;
+    }
+  }
+
+  /// 포트폴리오 저장
+  Future<bool> saveFolio(ResumeRequestDTO requestDTO, String jwtToken) async {
+    final url = Uri.parse('$baseUrl/resume/write');
+
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(requestDTO.toJson()),
+    );
+
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+
+      if (jsonResponse['data'] == true) {
+        return jsonResponse['data'];
+      } else {
+        Get.snackbar(
+          '포트폴리오 저장 실패',
+          jsonResponse['responseMessage'],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        );
+        return jsonResponse['data'];
+      }
+    } else {
+      Get.snackbar(
+        '포트폴리오 저장 실패',
         '서버 상태가 불안정합니다. 잠시 후 다시 시도해주세요.',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent,

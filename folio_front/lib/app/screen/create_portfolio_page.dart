@@ -25,6 +25,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
 
   final storage = const FlutterSecureStorage();
   String? jwtToken;
+  String? uid;
 
   Map<String, bool> sectionVisibility = {
     '이력서 제목': true,
@@ -43,7 +44,9 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
 
   void checkToken() async {
     jwtToken = await storage.read(key: 'jwt');
-    if (jwtToken == null) {
+    uid = await storage.read(key: 'uid');
+
+    if (jwtToken == null || uid == null) {
       // JWT 토큰이 없을 때 로그인 페이지로 이동
       Get.offAllNamed('/login');
       Get.snackbar(
@@ -117,21 +120,6 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              20,
-                              0,
-                              20,
-                              10,
-                            ),
-                            child: GradientButton(
-                                hintText: "임시저장",
-                                onPressed: () {
-                                  folioController.saveFolio();
-                                }
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-                          Padding(
                             padding:const EdgeInsets.fromLTRB(
                               20,
                               0,
@@ -139,9 +127,24 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                               10,
                             ),
                             child: GradientButton(
-                                hintText: "PDF 출력",
-                                onPressed: () {
-                                  folioController.saveFolio();
+                                hintText: "저장하기",
+                                onPressed: () async {
+                                   await folioController.saveFolio(
+                                    uid!,
+                                     jwtToken!
+                                  ).then((value){
+                                    if(value) {
+                                      Get.snackbar(
+                                        '포트폴리오 저장 성공',
+                                        '포트폴리오가 저장되었습니다.',
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        backgroundColor: Colors.green,
+                                        colorText: Colors.white,
+                                        margin: const EdgeInsets.fromLTRB(
+                                            20, 0, 20, 20),
+                                      );
+                                    }
+                                   });
                                 }
                             ),
                           ),
