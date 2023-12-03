@@ -1,0 +1,121 @@
+package com.spring.folio_back.dto.resume;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class ResumeResponseDTO {
+
+    private String userNickeName;
+    private String resumeName;
+    private String resumeSubtitle;
+    private String resumeUserName;
+    private String resumeUserEmail;
+    private String resumeUserPhone;
+    private String resumeUserYear;
+    private String resumeUserSelf;
+    private String resumeUserStack;
+    private String resumeUserProject1;
+    private String resumeUserProject1Date;
+    private String resumeUserProject1Stack;
+    private String resumeUserProject1Content;
+    private String resumeUserProject2;
+    private String resumeUserProject2Date;
+    private String resumeUserProject2Stack;
+    private String resumeUserProject2Content;
+    private String resumeUserProject3;
+    private String resumeUserProject3Date;
+    private String resumeUserProject3Stack;
+    private String resumeUserProject3Content;
+    private String resumeUserProject4;
+    private String resumeUserProject4Date;
+    private String resumeUserProject4Stack;
+    private String resumeUserProject4Content;
+    private String resumeUserEtc1;
+    private String resumeUserEtc1Date;
+    private String resumeUserEtc1Content;
+    private String resumeUserEtc2;
+    private String resumeUserEtc2Date;
+    private String resumeUserEtc2Content;
+    private String resumeUserEtc3;
+    private String resumeUserEtc3Date;
+    private String resumeUserEtc3Content;
+    private String resumeUserEtc4;
+    private String resumeUserEtc4Date;
+    private String resumeUserEtc4Content;
+    private String resumeUserEducation1;
+    private String resumeUserEducation1Date;
+    private String resumeUserEducation1Content;
+    private String resumeUserEducation1Special;
+    private String resumeUserEducation2;
+    private String resumeUserEducation2Date;
+    private String resumeUserEducation2Content;
+    private String resumeUserEducation2Special;
+    private String resumeUserEducation3;
+    private String resumeUserEducation3Date;
+    private String resumeUserEducation3Content;
+    private String resumeUserEducation3Special;
+    private String resumeUserEducation4;
+    private String resumeUserEducation4Date;
+    private String resumeUserEducation4Content;
+    private String resumeUserEducation4Special;
+
+    @Builder
+    public ResumeResponseDTO(String userNickeName,String resumeName, String resumeSubtitle, String resumeUserName, String resumeUserEmail, String resumeUserPhone, String resumeUserYear, String resumeUserSelf, String resumeUserStack, String resumeUserProject1, String resumeUserProject1Date, String resumeUserProject1Stack, String resumeUserProject1Content, String resumeUserProject2, String resumeUserProject2Date, String resumeUserProject2Stack, String resumeUserProject2Content, String resumeUserProject3, String resumeUserProject3Date, String resumeUserProject3Stack, String resumeUserProject3Content, String resumeUserProject4, String resumeUserProject4Date, String resumeUserProject4Stack, String resumeUserProject4Content, String resumeUserEtc1, String resumeUserEtc1Date, String resumeUserEtc1Content, String resumeUserEtc2, String resumeUserEtc2Date, String resumeUserEtc2Content, String resumeUserEtc3, String resumeUserEtc3Date, String resumeUserEtc3Content, String resumeUserEtc4, String resumeUserEtc4Date, String resumeUserEtc4Content, String resumeUserEducation1, String resumeUserEducation1Date, String resumeUserEducation1Content, String resumeUserEducation1Special, String resumeUserEducation2, String resumeUserEducation2Date, String resumeUserEducation2Content, String resumeUserEducation2Special, String resumeUserEducation3, String resumeUserEducation3Date, String resumeUserEducation3Content, String resumeUserEducation3Special, String resumeUserEducation4, String resumeUserEducation4Date, String resumeUserEducation4Content, String resumeUserEducation4Special) {
+        this.userNickeName = userNickeName;
+        this.resumeName = resumeName;
+        this.resumeSubtitle = resumeSubtitle;
+        this.resumeUserName = resumeUserName;
+        this.resumeUserEmail = resumeUserEmail;
+        this.resumeUserPhone = resumeUserPhone;
+        this.resumeUserYear = resumeUserYear;
+        this.resumeUserSelf = resumeUserSelf;
+        this.resumeUserStack = resumeUserStack;
+        this.resumeUserProject1 = resumeUserProject1;
+        this.resumeUserProject1Date = resumeUserProject1Date;
+        this.resumeUserProject1Stack = resumeUserProject1Stack;
+        this.resumeUserProject1Content = resumeUserProject1Content;
+        this.resumeUserProject2 = resumeUserProject2;
+        this.resumeUserProject2Date = resumeUserProject2Date;
+        this.resumeUserProject2Stack = resumeUserProject2Stack;
+        this.resumeUserProject2Content = resumeUserProject2Content;
+        this.resumeUserProject3 = resumeUserProject3;
+        this.resumeUserProject3Date = resumeUserProject3Date;
+        this.resumeUserProject3Stack = resumeUserProject3Stack;
+        this.resumeUserProject3Content = resumeUserProject3Content;
+        this.resumeUserProject4 = resumeUserProject4;
+        this.resumeUserProject4Date = resumeUserProject4Date;
+        this.resumeUserProject4Stack = resumeUserProject4Stack;
+        this.resumeUserProject4Content = resumeUserProject4Content;
+        this.resumeUserEtc1 = resumeUserEtc1;
+        this.resumeUserEtc1Date = resumeUserEtc1Date;
+        this.resumeUserEtc1Content = resumeUserEtc1Content;
+        this.resumeUserEtc2 = resumeUserEtc2;
+        this.resumeUserEtc2Date = resumeUserEtc2Date;
+        this.resumeUserEtc2Content = resumeUserEtc2Content;
+        this.resumeUserEtc3 = resumeUserEtc3;
+        this.resumeUserEtc3Date = resumeUserEtc3Date;
+        this.resumeUserEtc3Content = resumeUserEtc3Content;
+        this.resumeUserEtc4 = resumeUserEtc4;
+        this.resumeUserEtc4Date = resumeUserEtc4Date;
+        this.resumeUserEtc4Content = resumeUserEtc4Content;
+        this.resumeUserEducation1 = resumeUserEducation1;
+        this.resumeUserEducation1Date = resumeUserEducation1Date;
+        this.resumeUserEducation1Content = resumeUserEducation1Content;
+        this.resumeUserEducation1Special = resumeUserEducation1Special;
+        this.resumeUserEducation2 = resumeUserEducation2;
+        this.resumeUserEducation2Date = resumeUserEducation2Date;
+        this.resumeUserEducation2Content = resumeUserEducation2Content;
+        this.resumeUserEducation2Special = resumeUserEducation2Special;
+        this.resumeUserEducation3 = resumeUserEducation3;
+        this.resumeUserEducation3Date = resumeUserEducation3Date;
+        this.resumeUserEducation3Content = resumeUserEducation3Content;
+        this.resumeUserEducation3Special = resumeUserEducation3Special;
+        this.resumeUserEducation4 = resumeUserEducation4;
+        this.resumeUserEducation4Date = resumeUserEducation4Date;
+        this.resumeUserEducation4Content = resumeUserEducation4Content;
+        this.resumeUserEducation4Special = resumeUserEducation4Special;
+    }
+}

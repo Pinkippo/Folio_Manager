@@ -47,6 +47,8 @@ public class Resume {
     @Column(name = "resumeUserSelf")
     private String resumeUserSelf;
 
+    @Column(name = "resumeUserStack")
+    private String resumeUserStack;
 
     @Column(name = "resumeUserProject1")
     private String resumeUserProject1;
@@ -131,5 +133,53 @@ public class Resume {
 
     @Column(name = "resumeUserEtc4Content")
     private String resumeUserEtc4Content;
+
+    @Column(name = "resumeUserEducation1")
+    private String resumeUserEducation1;
+
+    @Column(name = "resumeUserEducation1Date")
+    private String resumeUserEducation1Date;
+
+    @Column(name = "resumeUserEducation1Content")
+    private String resumeUserEducation1Content;
+
+    @Column(name = "resumeUserEducation1Special")
+    private String resumeUserEducation1Special;
+
+    @Column(name = "resumeUserEducation2")
+    private String resumeUserEducation2;
+
+    @Column(name = "resumeUserEducation2Date")
+    private String resumeUserEducation2Date;
+
+    @Column(name = "resumeUserEducation2Content")
+    private String resumeUserEducation2Content;
+
+    @Column(name = "resumeUserEducation2Special")
+    private String resumeUserEducation2Special;
+
+    @Column(name = "resumeUserEducation3")
+    private String resumeUserEducation3;
+
+    @Column(name = "resumeUserEducation3Date")
+    private String resumeUserEducation3Date;
+
+    @Column(name = "resumeUserEducation3Content")
+    private String resumeUserEducation3Content;
+
+    @Column(name = "resumeUserEducation3Special")
+    private String resumeUserEducation3Special;
+
+    @Column(name = "resumeUserEducation4")
+    private String resumeUserEducation4;
+
+    @Column(name = "resumeUserEducation4Date")
+    private String resumeUserEducation4Date;
+
+    @Column(name = "resumeUserEducation4Content")
+    private String resumeUserEducation4Content;
+
+    @Column(name = "resumeUserEducation4Special")
+    private String resumeUserEducation4Special;
 
 }

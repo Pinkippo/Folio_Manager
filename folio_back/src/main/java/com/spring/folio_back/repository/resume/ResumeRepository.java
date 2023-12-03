@@ -9,4 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ResumeRepository extends JpaRepository<Resume, Long>, ResumeRespositoryCustom {
 
+    // 외래키 유저 이메일로 조회
+    Resume findByUser_Email(String email);
+
 }
