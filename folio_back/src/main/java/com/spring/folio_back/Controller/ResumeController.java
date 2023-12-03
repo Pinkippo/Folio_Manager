@@ -19,12 +19,12 @@ public class ResumeController {
     }
 
     @PostMapping("/write")
-    public ResponseEntity<DefaultRes<Boolean>> WriteResume(@RequestBody ResumeRequestDTO resumeRequestDTO){
-        boolean isWrite = resumeService.ResumeWrite(resumeRequestDTO);
-        if(isWrite){
-            return ResponseEntity.ok(DefaultRes.res(StatusCode.OK, "이력서 작성 성공", true));
+    public ResponseEntity<DefaultRes<String>> WriteResume(@RequestBody ResumeRequestDTO resumeRequestDTO){
+        String userEmail = resumeService.ResumeWrite(resumeRequestDTO);
+        if(!userEmail.equals("")){
+            return ResponseEntity.ok(DefaultRes.res(StatusCode.OK, "이력서 작성 성공", userEmail));
         }else{
-            return ResponseEntity.ok(DefaultRes.res(StatusCode.DB_ERROR, "이력서 작성 실패", false));
+            return ResponseEntity.ok(DefaultRes.res(StatusCode.DB_ERROR, "이력서 작성 실패", ""));
         }
     }
 

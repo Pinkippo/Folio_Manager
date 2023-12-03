@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResumeResponseDTO {
 
-    private String userNickeName;
+    private String userNickName;
     private String resumeName;
     private String resumeSubtitle;
     private String resumeUserName;
@@ -64,7 +64,7 @@ public class ResumeResponseDTO {
 
     @Builder
     public ResumeResponseDTO(String userNickeName,String resumeName, String resumeSubtitle, String resumeUserName, String resumeUserEmail, String resumeUserPhone, String resumeUserYear, String resumeUserSelf, String resumeUserStack, String resumeUserProject1, String resumeUserProject1Date, String resumeUserProject1Stack, String resumeUserProject1Content, String resumeUserProject2, String resumeUserProject2Date, String resumeUserProject2Stack, String resumeUserProject2Content, String resumeUserProject3, String resumeUserProject3Date, String resumeUserProject3Stack, String resumeUserProject3Content, String resumeUserProject4, String resumeUserProject4Date, String resumeUserProject4Stack, String resumeUserProject4Content, String resumeUserEtc1, String resumeUserEtc1Date, String resumeUserEtc1Content, String resumeUserEtc2, String resumeUserEtc2Date, String resumeUserEtc2Content, String resumeUserEtc3, String resumeUserEtc3Date, String resumeUserEtc3Content, String resumeUserEtc4, String resumeUserEtc4Date, String resumeUserEtc4Content, String resumeUserEducation1, String resumeUserEducation1Date, String resumeUserEducation1Content, String resumeUserEducation1Special, String resumeUserEducation2, String resumeUserEducation2Date, String resumeUserEducation2Content, String resumeUserEducation2Special, String resumeUserEducation3, String resumeUserEducation3Date, String resumeUserEducation3Content, String resumeUserEducation3Special, String resumeUserEducation4, String resumeUserEducation4Date, String resumeUserEducation4Content, String resumeUserEducation4Special) {
-        this.userNickeName = userNickeName;
+        this.userNickName = userNickeName;
         this.resumeName = resumeName;
         this.resumeSubtitle = resumeSubtitle;
         this.resumeUserName = resumeUserName;
