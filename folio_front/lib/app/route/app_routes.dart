@@ -8,5 +8,6 @@ abstract class Routes{
   static const login = '/login';
   static const register = '/register';
   static const create = '/create';
+  static const portfolio = '/folio';
 
 }

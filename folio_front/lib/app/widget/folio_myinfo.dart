@@ -198,7 +198,7 @@ class FolioMyInfo extends GetView<FolioController> {
             ),
             maxLines: 7, // 최대 라인 수
             minLines: 7, // 최소 라인 수
-            onChanged: controller.updateFolioName,
+            onChanged: controller.updateFolioMyIntro,
           ),
         ),
       ],

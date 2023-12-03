@@ -21,7 +21,12 @@ class CreatePortfolioPage extends StatefulWidget {
   State<CreatePortfolioPage> createState() => _CreatePortfolioPageState();
 }
 
-class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
+class _CreatePortfolioPageState extends State<CreatePortfolioPage> with AutomaticKeepAliveClientMixin{
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  bool get wantKeepAlive => true;
 
   final storage = const FlutterSecureStorage();
   String? jwtToken;
@@ -61,10 +66,12 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
 
     final FolioController folioController = Get.find<FolioController>();
 
     return LayoutBuilder(
+      key: _formKey,
       builder: (context, constraints) {
         return Scaffold(
           backgroundColor: AppColors.backgroundColor,
@@ -133,7 +140,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                                     uid!,
                                      jwtToken!
                                   ).then((value){
-                                    if(value) {
+                                    if(value != "") {
                                       Get.snackbar(
                                         '포트폴리오 저장 성공',
                                         '포트폴리오가 저장되었습니다.',
@@ -143,6 +150,10 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                                         margin: const EdgeInsets.fromLTRB(
                                             20, 0, 20, 20),
                                       );
+                                      /// 메인 이동
+                                      Get.offAllNamed('/');
+                                      /// 페이지 이동
+                                      Get.toNamed('/folio?email=$value');
                                     }
                                    });
                                 }
@@ -157,31 +168,18 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
               SizedBox(
                 width: constraints.maxWidth * 0.85,
                 height: constraints.maxHeight,
-                child: ListView.builder(
-                  itemCount: sectionVisibility.entries
-                      .where((entry) => entry.value)
-                      .length,
-                  itemBuilder: (context, index) {
-                    final visibleEntries = sectionVisibility.entries.where((entry) => entry.value).toList();
-                    final entry = visibleEntries[index];
-
-                    // 7개의 스위치문을 통해서 각각 원하는 위젯 반환하게 만들어줘
-                    switch (entry.key) {
-                      case '이력서 제목':
-                        return const FolioName();
-                      case '개인정보':
-                        return const FolioMyInfo();
-                      case '학력 및 이수 교육':
-                        return const FolioEducation();
-                      case '기술스택':
-                        return const FolioDevStack();
-                      case '기타사항':
-                        return const FolioAward();
-                      case '프로젝트':
-                        return const FolioProject();
-                    }
-                  },
-                ),
+                child: const SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      FolioName(),
+                      FolioMyInfo(),
+                      FolioEducation(),
+                      FolioDevStack(),
+                      FolioAward(),
+                      FolioProject(),
+                    ],
+                  ),
+                )
               ),
             ],
           ),
@@ -189,5 +187,6 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
       },
     );
   }
+
 }
 

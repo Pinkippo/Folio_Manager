@@ -36,10 +36,10 @@ class ToggleSection extends GetView<FolioController> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 30),
                   Container(
                       width: 10,
-                      height: 10,
+                      height: 20,
                       decoration: BoxDecoration(
                         color: (() {
                           switch (title) {
@@ -57,12 +57,12 @@ class ToggleSection extends GetView<FolioController> {
                 ],
               ),
             ),
-            Switch(
-              value: isVisible,
-              onChanged: onToggle,
-              activeColor: AppColors.mainColor,
-              inactiveTrackColor: AppColors.beigeColor,
-            ),
+            // Switch(
+            //   value: isVisible,
+            //   onChanged: onToggle,
+            //   activeColor: AppColors.mainColor,
+            //   inactiveTrackColor: AppColors.beigeColor,
+            // ),
           ],
         ),
     );

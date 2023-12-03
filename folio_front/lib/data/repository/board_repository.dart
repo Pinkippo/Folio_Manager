@@ -3,8 +3,6 @@ import 'package:folio_front/data/model/comment_request_model.dart';
 import '../model/board_response_model.dart';
 import '../provider/api.dart';
 
-import 'package:http/http.dart' as http;
-
 /// 회원 데이터 처리 클래스
 class BoardRepository{
 

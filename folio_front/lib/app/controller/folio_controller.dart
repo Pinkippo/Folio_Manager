@@ -119,7 +119,7 @@ class FolioController extends GetxController{
   }
 
   /// 포트폴리오 저장 메서드
-  Future<bool> saveFolio(String uid, String jwtToken) async {
+  Future<String> saveFolio(String uid, String jwtToken) async {
     final ResumeRequestDTO requestDTO = ResumeRequestDTO(
       uid : uid,
       resumeName: folioName.value,
@@ -129,7 +129,7 @@ class FolioController extends GetxController{
       resumeUserPhone: folioMyPhone.value,
       resumeUserYear: folioMyCareer.value,
       resumeUserSelf: folioMyIntro.value,
-      resumeUserStack: folioMySkill.join(','),
+      resumeUserStack: folioSkillList.join(','),
       resumeUserEducation1: folioEducationList.length > 0 ? folioEducationList[0].name : '',
       resumeUserEducation1Date: folioEducationList.length > 0 ? folioEducationList[0].period : '',
       resumeUserEducation1Content: folioEducationList.length > 0 ? folioEducationList[0].content : '',

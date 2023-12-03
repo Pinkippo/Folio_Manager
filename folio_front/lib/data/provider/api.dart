@@ -9,6 +9,7 @@ import '../model/board_request_model.dart';
 import '../model/board_response_model.dart';
 import '../model/comment_request_model.dart';
 import '../model/folio_reqeust_model.dart';
+import '../model/folio_response_model.dart';
 
 const baseUrl = 'http://192.168.0.9:80';
 
@@ -200,7 +201,7 @@ class MyApiClient {
   }
 
   /// 포트폴리오 저장
-  Future<bool> saveFolio(ResumeRequestDTO requestDTO, String jwtToken) async {
+  Future<String> saveFolio(ResumeRequestDTO requestDTO, String jwtToken) async {
     final url = Uri.parse('$baseUrl/resume/write');
 
     final response = await http.post(
@@ -219,7 +220,7 @@ class MyApiClient {
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
-      if (jsonResponse['data'] == true) {
+      if (jsonResponse['data'] != "") {
         return jsonResponse['data'];
       } else {
         Get.snackbar(
@@ -241,8 +242,53 @@ class MyApiClient {
         colorText: Colors.white,
         margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       );
-      return false;
+      return "";
     }
   }
+
+  // loadFolio
+  Future<ResumeResponseDTO> loadFolio(String email) async {
+    final url = Uri.parse('$baseUrl/resume/read/$email');
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+      print(jsonResponse);
+
+      if (jsonResponse.containsKey('data')) {
+        final Map<String, dynamic> jsonMap = jsonResponse['data'];
+        return ResumeResponseDTO.fromJson(jsonMap);
+      } else {
+        Get.snackbar(
+          '포트폴리오 불러오기 실패',
+          '서버 상태가 불안정합니다. 잠시 후 다시 시도해주세요.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        );
+        throw Exception('Failed to get main list');
+      }
+    } else {
+      Get.snackbar(
+        '포트폴리오 불러오기 실패',
+        '서버 상태가 불안정합니다. 잠시 후 다시 시도해주세요.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+      );
+      throw Exception('Failed to get main list');
+    }
+  }
+
 
 }
