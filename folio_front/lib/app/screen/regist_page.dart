@@ -79,7 +79,6 @@ class RegisterPage extends GetView<LoginController> {
             password: Get.find<LoginController>().password.value,
             name: Get.find<LoginController>().name.value)).then((value) {
       if (value != '') {
-        storage.write(key: 'jwt', value: value);
         Get.offAllNamed('/');
       } else {
         Get.snackbar(

@@ -36,7 +36,7 @@ class LoginController extends GetxController{
   Future<String> register(RegisterRequestModel requestModel) async {
     final response = await authRepository.register(requestModel);
     registerResponse.value = response;
-    return (response.success) ? response.jwtToken : '';
+    return response.jwtToken;
   }
 
   // ID 변경

@@ -21,6 +21,8 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   TextEditingController titleText = TextEditingController();
   TextEditingController content = TextEditingController();
 
+  TextEditingController emailText = TextEditingController();
+
   final storage = const FlutterSecureStorage();
 
   String? jwtToken;
@@ -161,105 +163,169 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           BoardPage(),
         ],
       ),
-      floatingActionButton: SizedBox(
-        width: 80,
-        height: 80,
-        child: FloatingActionButton(
-          hoverElevation: 10,
-          backgroundColor: AppColors.mainColor,
-          onPressed: () async {
-            /// 토큰이 없을 경우 로그인이 필요하다고 알림
-            if (jwtToken == null) {
-              Get.snackbar(
-                "알림",
-                "로그인이 필요합니다",
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.redAccent,
-                colorText: Colors.white,
-                margin: const EdgeInsets.fromLTRB(20, 0, 100, 20),
-              );
-            } else {
-              // 요청사항 작성 다이얼로그 생성
-              /// TODO : 요청사항 작성 연결
-              await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('관리자 요청사항 작성'),
-                    content: SizedBox(
-                      height: 300,
-                      width: 800,
-                      child: Column(
-                        children: [
-                          TextField(
-                            maxLines: 1,
-                            maxLength: 30,
-                            controller: titleText,
-                            onChanged: (value) {
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SizedBox(
+            width: 80,
+            height: 80,
+            child: FloatingActionButton(
+              hoverElevation: 10,
+              backgroundColor: AppColors.mainColor,
+              onPressed: () async {
+                /// 토큰이 없을 경우 로그인이 필요하다고 알림
+                if (jwtToken == null) {
+                  Get.snackbar(
+                    "알림",
+                    "로그인이 필요합니다",
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.redAccent,
+                    colorText: Colors.white,
+                    margin: const EdgeInsets.fromLTRB(20, 0, 100, 20),
+                  );
+                } else {
+                  // 요청사항 작성 다이얼로그 생성
+                  /// TODO : 요청사항 작성 연결
+                  await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('관리자 요청사항 작성'),
+                        content: SizedBox(
+                          height: 300,
+                          width: 800,
+                          child: Column(
+                            children: [
+                              TextField(
+                                maxLines: 1,
+                                maxLength: 30,
+                                controller: titleText,
+                                onChanged: (value) {
 
-                            },
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: '제목',
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextField(
-                            controller: content,
-                            onChanged: (value) {
+                                },
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: '제목',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: content,
+                                onChanged: (value) {
 
+                                },
+                                maxLines: 10,
+                                maxLength: 256,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: '내용',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Get.back();
                             },
-                            maxLines: 10,
-                            maxLength: 256,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: '내용',
-                            ),
+                            child: const Text('취소', style : TextStyle(color: AppColors.mainColor)),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              String? uid = await storage.read(key: 'uid') ?? '';
+                              MyApiClient().writeBoard(
+                                BoardRequestModel(uid: int.parse(uid), title: titleText.text, content: content.text), jwtToken!,
+                              ).then((value){
+                                Get.snackbar(
+                                  '요청사항 등록 성공',
+                                  '요청사항이 등록되었습니다.',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor: Colors.greenAccent,
+                                  colorText: Colors.white,
+                                  margin: const EdgeInsets.fromLTRB(20, 0, 100, 20),
+                                );
+                              });
+                              Get.back();
+                            },
+                            child: const Text('작성', style : TextStyle(color: AppColors.mainColor)),
                           ),
                         ],
-                      ),
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        child: const Text('취소'),
-                      ),
-                      TextButton(
-                        onPressed: () async {
-                          String? uid = await storage.read(key: 'uid') ?? '';
-                          MyApiClient().writeBoard(
-                            BoardRequestModel(uid: int.parse(uid), title: titleText.text, content: content.text), jwtToken!,
-                          ).then((value){
-                            Get.snackbar(
-                              '요청사항 등록 성공',
-                              '요청사항이 등록되었습니다.',
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.greenAccent,
-                              colorText: Colors.white,
-                              margin: const EdgeInsets.fromLTRB(20, 0, 100, 20),
-                            );
-                          });
-                          Get.back();
-                        },
-                        child: const Text('작성'),
-                      ),
-                    ],
+                      );
+                    },
                   );
-                },
-              );
-            }
-          },
-          elevation: 10, // Adjust the elevation as needed
-          mini: false, // Set to true if you want a smaller version
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16.0)), // Adjust the border radius as needed
+                }
+              },
+              elevation: 10, // Adjust the elevation as needed
+              mini: false, // Set to true if you want a smaller version
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16.0)), // Adjust the border radius as needed
+              ),
+              child: const Icon(Icons.post_add, color: AppColors.backgroundColor, size: 40.0),
+            ),
           ),
-          child: const Icon(Icons.post_add, color: AppColors.backgroundColor, size: 40.0),
-        ),
+          const SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            width: 80,
+            height: 80,
+            child: FloatingActionButton(
+              hoverElevation: 10,
+              backgroundColor: AppColors.mainColor,
+              onPressed: () async {
+                await showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('이메일로 포트폴리오 탐색'),
+                      content: SizedBox(
+                        height: 120,
+                        width: 800,
+                        child: Column(
+                          children: [
+                            TextField(
+                              maxLines: 1,
+                              maxLength: 30,
+                              controller: emailText,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: '이메일',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text('취소', style : TextStyle(color: AppColors.mainColor)),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            Get.back();
+                            await Get.toNamed('/folio?email=${emailText.text}');
+                          },
+                          child: const Text('탐색', style : TextStyle(color: AppColors.mainColor)),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              elevation: 10, // Adjust the elevation as needed
+              mini: false, // Set to true if you want a smaller version
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16.0)), // Adjust the border radius as needed
+              ),
+              child: const Icon(Icons.find_in_page, color: AppColors.backgroundColor, size: 40.0),
+            ),
+          ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

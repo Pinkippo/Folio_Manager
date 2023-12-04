@@ -11,7 +11,9 @@ import '../model/comment_request_model.dart';
 import '../model/folio_reqeust_model.dart';
 import '../model/folio_response_model.dart';
 
-const baseUrl = 'http://192.168.0.9:80';
+const baseUrl = 'https://proxy.cors.sh/http://52.78.19.37:8080';
+// const baseUrl = 'http://localhost:80';
+// aws = http://52.78.19.37:8080;
 
 class MyApiClient {
 
@@ -22,6 +24,7 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
+        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(requestModel.toJson()),
     );
@@ -29,6 +32,7 @@ class MyApiClient {
 
     if (response.statusCode == 200) {
       RegisterResponseModel responseModel = RegisterResponseModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      print(responseModel);
       return responseModel;
     } else {
       throw Exception('Failed to register');
@@ -43,6 +47,7 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
+        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(requestModel.toJson()),
     );
@@ -65,7 +70,7 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf',
         'Authorization': 'Bearer $jwtToken',
       },
       body: jsonEncode(boardRequestModel.toJson()),
@@ -111,7 +116,7 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
     );
 
@@ -162,8 +167,8 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
         'Authorization': 'Bearer ${commentRequestModel.jwtToken}',
+        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(commentRequestModel.toJson()),
     );
@@ -208,8 +213,8 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
         'Authorization': 'Bearer $jwtToken',
+        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(requestDTO.toJson()),
     );
@@ -254,7 +259,7 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
     );
 
@@ -263,13 +268,14 @@ class MyApiClient {
       final Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
       print(jsonResponse);
 
-      if (jsonResponse.containsKey('data')) {
+      if (jsonResponse['data'] != null) {
         final Map<String, dynamic> jsonMap = jsonResponse['data'];
         return ResumeResponseDTO.fromJson(jsonMap);
       } else {
+        Get.offAllNamed('/');
         Get.snackbar(
           '포트폴리오 불러오기 실패',
-          '서버 상태가 불안정합니다. 잠시 후 다시 시도해주세요.',
+          '존재하지 않는 이메일의 이력서 입니다. 다시 확인해주세요.',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white,
@@ -278,6 +284,7 @@ class MyApiClient {
         throw Exception('Failed to get main list');
       }
     } else {
+      Get.offAllNamed('/');
       Get.snackbar(
         '포트폴리오 불러오기 실패',
         '서버 상태가 불안정합니다. 잠시 후 다시 시도해주세요.',

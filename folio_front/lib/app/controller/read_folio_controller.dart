@@ -13,12 +13,6 @@ class FolioReadController extends GetxController{
 
   FolioReadController({required this.folioRepository});
 
-  Rx<int> folioProjectCount = 0.obs;
-
-  Rx<int> folioEtcCount = 0.obs;
-
-  Rx<int> folioEducationCount = 0.obs;
-
   Rx<ResumeResponseDTO> resume = ResumeResponseDTO(
     userNickName: '',
     resumeName: '',
@@ -77,8 +71,8 @@ class FolioReadController extends GetxController{
 
 
   @override
-  void onInit() {
-    loadFolio();
+  void onInit() async {
+    await loadFolio();
     super.onInit();
   }
 
@@ -88,25 +82,6 @@ class FolioReadController extends GetxController{
       String email = parameters['email'] ?? '';
 
       resume.value = await FolioRepository().loadTempFolio(email);
-
-      resume.value.resumeUserProject1 != '' ? folioProjectCount.value++ : folioProjectCount.value = folioProjectCount.value;
-      resume.value.resumeUserProject2 != '' ? folioProjectCount.value++ : folioProjectCount.value = folioProjectCount.value;
-      resume.value.resumeUserProject3 != '' ? folioProjectCount.value++ : folioProjectCount.value = folioProjectCount.value;
-      resume.value.resumeUserProject4 != '' ? folioProjectCount.value++ : folioProjectCount.value = folioProjectCount.value;
-
-      resume.value.resumeUserEtc1 != '' ? folioEtcCount.value++ : folioEtcCount.value = folioEtcCount.value;
-      resume.value.resumeUserEtc2 != '' ? folioEtcCount.value++ : folioEtcCount.value = folioEtcCount.value;
-      resume.value.resumeUserEtc3 != '' ? folioEtcCount.value++ : folioEtcCount.value = folioEtcCount.value;
-      resume.value.resumeUserEtc4 != '' ? folioEtcCount.value++ : folioEtcCount.value = folioEtcCount.value;
-
-      resume.value.resumeUserEducation1 != '' ? folioEducationCount.value++ : folioEducationCount.value = folioEducationCount.value;
-      resume.value.resumeUserEducation2 != '' ? folioEducationCount.value++ : folioEducationCount.value = folioEducationCount.value;
-      resume.value.resumeUserEducation3 != '' ? folioEducationCount.value++ : folioEducationCount.value = folioEducationCount.value;
-      resume.value.resumeUserEducation4 != '' ? folioEducationCount.value++ : folioEducationCount.value = folioEducationCount.value;
-
-      print('folioProjectCount : ${folioProjectCount.value}');
-      print('folioEtcCount : ${folioEtcCount.value}');
-      print('folioEducationCount : ${folioEducationCount.value}');
 
     } catch (error) {
       print(error);

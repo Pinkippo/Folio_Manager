@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:folio_front/app/controller/read_folio_controller.dart';
 import 'package:folio_front/common/app_colors.dart';
@@ -5,6 +7,7 @@ import 'package:folio_front/data/model/folio_response_model.dart';
 import 'package:folio_front/data/repository/folio_repository.dart';
 import 'package:get/get.dart';
 
+import '../../utils/pdf_util.dart';
 import '../widget/gradient_button.dart';
 
 class ReadPortFolioPage extends GetView<FolioReadController> {
@@ -28,12 +31,14 @@ class ReadPortFolioPage extends GetView<FolioReadController> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${controller.resume.value.userNickName}님의",
-                          style: const TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.mainColor,
+                        Obx(
+                          () => Text(
+                            "${controller.resume.value.userNickName}님의",
+                            style: const TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.mainColor,
+                            ),
                           ),
                         ),
                         const Text(
@@ -71,7 +76,7 @@ class ReadPortFolioPage extends GetView<FolioReadController> {
                       ),
                       child: GradientButton(
                           hintText: "PDF 저장하기", onPressed: () async {
-
+                        await PdfUtil.generate(controller.resume.value);
                       }),
                     ),
                   ],

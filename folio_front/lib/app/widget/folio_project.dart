@@ -237,9 +237,11 @@ class FolioProject extends GetView<FolioController> {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
-                  if (titleController.text.isNotEmpty ||
-                      periodController.text.isNotEmpty ||
-                      detailController.text.isNotEmpty) {
+                  if (titleController.text.isNotEmpty &&
+                      periodController.text.isNotEmpty &&
+                      detailController.text.isNotEmpty &&
+                      controller.folioMySkill.isNotEmpty &&
+                      controller.folioProjectList.length < 4) {
                     controller.folioProjectList.add(
                       FolioProjectItem(
                         name: titleController.text,
@@ -252,7 +254,7 @@ class FolioProject extends GetView<FolioController> {
                     periodController.clear();
                     detailController.clear();
                     controller.folioMySkill.clear();
-                  } else if(controller.folioProjectList.length >= 4){
+                  } else if( controller.folioProjectList.length >= 4){
                     Get.snackbar(
                       '항목 추가 실패',
                       '항목은 최대 4개까지 추가할 수 있습니다.',

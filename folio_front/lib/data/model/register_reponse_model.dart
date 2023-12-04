@@ -15,8 +15,8 @@ class RegisterResponseModel {
   factory RegisterResponseModel.fromJson(Map<String, dynamic> json) {
     return RegisterResponseModel(
       jwtToken: json['jwtToken'],
-      nickname: json['nickname'],
-      uid: json['uid'],
+      nickname: json['nickname'] ?? '',
+      uid: json['uid'] ?? 0,
     );
   }
 }
