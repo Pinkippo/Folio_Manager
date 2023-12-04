@@ -48,7 +48,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 헤더에서 토큰을 가져옴
         String requestHeader = request.getHeader("Authorization");
 
-        logger.info(" Header :  {}", requestHeader);
         String username = null;
         String token = null;
 
@@ -74,12 +73,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 e.printStackTrace();
             }
 
-        } else {
-            logger.info("Invalid Header Value !! ");
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-            System.out.println("username : " + username);
 
             // DB에서 username을 기반으로 UserDetails 객체를 가져옴
             User user = this.userDetailsService.loadUserByUsername(username);
@@ -94,7 +89,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             } else {
                 logger.info("Validation fails !!");
             }
-
 
         }
 

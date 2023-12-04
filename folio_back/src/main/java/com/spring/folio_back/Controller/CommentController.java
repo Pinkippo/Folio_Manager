@@ -37,10 +37,8 @@ public class CommentController {
         // 댓글 작성
         boolean isWrite = commentService.CommentWirte(commentRequestDTO,user.get());
         if(isWrite) {
-            System.out.println("댓글 작성 성공");
             return new ResponseEntity<>(DefaultRes.res(StatusCode.OK, ResponseMessage.WRITE_COMMENT, true), HttpStatus.OK);
         }else{
-            System.out.println("댓글 작성 실패");
             return new ResponseEntity<>(DefaultRes.res(StatusCode.OK, ResponseMessage.NOT_CREATE_BOARD, false), HttpStatus.OK);
         }
 

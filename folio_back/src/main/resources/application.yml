@@ -1,5 +1,5 @@
 server: # 서버 설정
-  port: 80
+  port: 8080 # aws = 8080
 
 spring: # 스프링 설정
   profiles:
@@ -20,10 +20,9 @@ spring: # 스프링 설정
       properties:
         hibernate.default_batch_fetch_size: 1000
 
-
   datasource: # 데이터베이스 연결 설정
     url: jdbc:mysql://localhost:3306/folio?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
+    username: folio # aws = folio
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
 
