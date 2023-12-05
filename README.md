@@ -12,11 +12,11 @@
 ## 💻 실행 화면
 | 메인 | 회원가입 로그인 |
 |:-:|:-:|
-| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/e33944dc-b3f1-4cc2-9ae1-683527fcad70" width="400"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/49207550-4605-4b5c-a07e-d28dd7e0ff6f" width="400">|
+| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/e33944dc-b3f1-4cc2-9ae1-683527fcad70" width="380"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/49207550-4605-4b5c-a07e-d28dd7e0ff6f" width="380">|
 | 요청사항 | 이력서 작성 |
-| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/96763462-8f63-4d49-b6f7-d7c2007ee2c6" width="400"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/751b3486-001f-4384-bb56-25b7402f96ef" width="400">|
+| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/96763462-8f63-4d49-b6f7-d7c2007ee2c6" width="380"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/751b3486-001f-4384-bb56-25b7402f96ef" width="380">|
 | 이력서 공유 및 다운로드 | 요약 |
-| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/e6a0795f-dfb4-456b-a748-0804a3dc0a15" width="400"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/2325e09e-5e6f-4b48-9e4c-49783bba9f39" width="400"> |
+| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/e6a0795f-dfb4-456b-a748-0804a3dc0a15" width="380"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/2325e09e-5e6f-4b48-9e4c-49783bba9f39" width="380"> |
 
 <br>
 
