@@ -1,10 +1,22 @@
-# [Folio](https://folio-16962.web.app/)
+ <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/4fb7f506-1592-41b5-a6cf-d66fb8e42d83" width="300">
 
 <br>
 
-## 주요 기능
-
+## ⚙️ 주요 기능
  포트폴리오를 작성하여 링크로 공유하고 PDF 출력 가능한 플러터 웹
+
+현재 배포중 : [Folio 바로가기](https://folio-16962.web.app/)
+
+<br>
+
+## 💻 실행 화면
+| 메인 | 회원가입 로그인 |
+|:-:|:-:|
+| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/e33944dc-b3f1-4cc2-9ae1-683527fcad70" width="500"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/49207550-4605-4b5c-a07e-d28dd7e0ff6f" width="500">|
+| 요청사항 | 이력서 작성 |
+| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/96763462-8f63-4d49-b6f7-d7c2007ee2c6" width="500"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/751b3486-001f-4384-bb56-25b7402f96ef" width="500">|
+| 이력서 공유 및 다운로드 | 요약 |
+| <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/e6a0795f-dfb4-456b-a748-0804a3dc0a15" width="500"> | <img src="https://github.com/Pinkippo/Folio_Manager/assets/89853084/2325e09e-5e6f-4b48-9e4c-49783bba9f39" width="500"> |
 
 <br>
 
@@ -26,7 +38,13 @@
 
 <br>
 
-## 참고 자료
+## ⚙️ 시스템 구성도
+
+<img src = "https://github.com/Pinkippo/Folio_Manager/assets/89853084/87f0fc24-34f8-4e74-9363-91e53fa717b7" width = "800">
+
+<br>
+
+## 🔑 참고 자료
 
 파이어베이스 공식 문서: https://firebase.flutter.dev/docs/overview<P>
 스프링 부트 공식 문서: https://spring.io/projects/spring-boot<P>
@@ -39,9 +57,5 @@
 | 이름   | GitHub                                           |
 | ------ | ------------------------------------------------ |
 | 한승완 | [@Pinkippo](https://github.com/Pinkippo)         |
-
-<br>
-
-![foliovideo](https://github.com/Pinkippo/Folio_Manager/assets/89853084/2325e09e-5e6f-4b48-9e4c-49783bba9f39)
 
 <br>
