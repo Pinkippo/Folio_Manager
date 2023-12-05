@@ -75,6 +75,8 @@ class SecurityConfig {
             c.configurationSource(source);
         });
 
+        http.csrf(AbstractHttpConfigurer::disable);
+
         return http.build();
     }
 
