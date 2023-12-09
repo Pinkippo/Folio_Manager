@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:folio_front/app/controller/login_controller.dart';
 import 'package:folio_front/common/app_colors.dart';
-import 'package:folio_front/data/model/register_request_model.dart';
-import 'package:get/get.dart';
 
 class GradientButton extends StatelessWidget {
 
@@ -16,8 +12,6 @@ class GradientButton extends StatelessWidget {
         required this.hintText,
         required this.onPressed
       }) : super(key: key);
-
-  static const storage = FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/login_controller.dart';
 import 'package:folio_front/app/screen/main_page.dart';
 import 'package:folio_front/app/widget/gradient_button.dart';
@@ -10,11 +9,10 @@ import 'package:folio_front/data/model/register_request_model.dart';
 import 'package:folio_front/data/provider/api.dart';
 import 'package:folio_front/data/repository/auth_repository.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
-
-  final storage = const FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +69,10 @@ class LoginPage extends GetView<LoginController> {
 
     await Get.find<LoginController>().login().then((value) async {
       if (value.jwtToken != '') {
-        await storage.write(key: 'jwt', value: value.jwtToken);
-        await storage.write(key: 'uid', value : value.uid.toString());
-        await storage.write(key: 'nickname', value : value.nickname);
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('jwt', value.jwtToken);
+        await prefs.setString('uid', value.uid.toString());
+        await prefs.setString('nickname', value.nickname);
         Get.off(() => const MainPage());
       } else {
         Get.snackbar(

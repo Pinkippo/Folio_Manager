@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/folio_controller.dart';
 import 'package:folio_front/app/widget/folio_dev_stack.dart';
 import 'package:folio_front/app/widget/folio_education.dart';
@@ -9,6 +8,7 @@ import 'package:folio_front/app/widget/gradient_button.dart';
 import 'package:folio_front/app/widget/toggle_selection.dart';
 import 'package:folio_front/common/app_colors.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/folio_award.dart';
 import '../widget/folio_project.dart';
@@ -28,7 +28,6 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> with Automati
   @override
   bool get wantKeepAlive => true;
 
-  final storage = const FlutterSecureStorage();
   String? jwtToken;
   String? uid;
 
@@ -48,8 +47,9 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> with Automati
   }
 
   void checkToken() async {
-    jwtToken = await storage.read(key: 'jwt');
-    uid = await storage.read(key: 'uid');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    jwtToken = prefs.getString('jwt');
+    uid = prefs.getString('uid');
 
     if (jwtToken == null || uid == null) {
       // JWT 토큰이 없을 때 로그인 페이지로 이동

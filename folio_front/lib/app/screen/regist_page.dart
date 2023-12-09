@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/login_controller.dart';
 import 'package:folio_front/app/widget/gradient_button.dart';
 import 'package:folio_front/app/widget/login_field.dart';
@@ -9,8 +8,6 @@ import 'package:get/get.dart';
 
 class RegisterPage extends GetView<LoginController> {
   const RegisterPage({super.key});
-
-  final storage = const FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {

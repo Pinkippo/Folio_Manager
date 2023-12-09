@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/screen/board_page.dart';
 import 'package:folio_front/app/screen/explain_page.dart';
 import 'package:folio_front/app/screen/portfolio_page.dart';
@@ -7,6 +6,7 @@ import 'package:folio_front/common/app_colors.dart';
 import 'package:folio_front/data/model/board_request_model.dart';
 import 'package:folio_front/data/provider/api.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -22,8 +22,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   TextEditingController content = TextEditingController();
 
   TextEditingController emailText = TextEditingController();
-
-  final storage = const FlutterSecureStorage();
 
   String? jwtToken;
 
@@ -95,8 +93,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   }
 
   getToken() async {
-    jwtToken = await storage.read(key: 'jwt');
-    print('jwtToken : $jwtToken');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    jwtToken = prefs.getString('jwt') ?? '';
+    print('jwt : $jwtToken');
   }
 
   @override
@@ -170,6 +169,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             width: 80,
             height: 80,
             child: FloatingActionButton(
+              heroTag: "write",
               hoverElevation: 10,
               backgroundColor: AppColors.mainColor,
               onPressed: () async {
@@ -235,9 +235,10 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                           ),
                           TextButton(
                             onPressed: () async {
-                              String? uid = await storage.read(key: 'uid') ?? '';
+                              final SharedPreferences prefs = await SharedPreferences.getInstance();
+                              String? uid = prefs.getString('uid');
                               MyApiClient().writeBoard(
-                                BoardRequestModel(uid: int.parse(uid), title: titleText.text, content: content.text), jwtToken!,
+                                BoardRequestModel(uid: int.parse(uid!), title: titleText.text, content: content.text), jwtToken!,
                               ).then((value){
                                 Get.snackbar(
                                   '요청사항 등록 성공',
@@ -273,6 +274,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             width: 80,
             height: 80,
             child: FloatingActionButton(
+              heroTag: "find",
               hoverElevation: 10,
               backgroundColor: AppColors.mainColor,
               onPressed: () async {

@@ -1,16 +1,14 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/data/model/board_response_model.dart';
 import 'package:folio_front/data/model/comment_request_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/model/comment_response_model.dart';
 import '../../data/model/user_response_model.dart';
 import '../../data/repository/board_repository.dart';
 
 class BoardController extends GetxController {
-
-  final storage = const FlutterSecureStorage();
 
   /// 댓글 입력 컨트롤러
   RxString commentContent = ''.obs;
@@ -102,8 +100,9 @@ class BoardController extends GetxController {
   /// 댓글 등록 메서드
   Future<bool> addComment(int bid) async {
 
-    String? uid = await storage.read(key: 'uid') ?? '';
-    String? jwt = await storage.read(key: 'jwt') ?? '';
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? uid = prefs.getString('uid') ?? '';
+    String? jwt = prefs.getString('jwt') ?? '';
 
     if(commentContent.value == '') {
       Get.snackbar(
@@ -138,7 +137,7 @@ class BoardController extends GetxController {
           CommentResponseModel(
             content: commentContent.value,
             writeDate: DateTime.now(),
-            nickname: await storage.read(key: 'nickname') as String,
+            nickname: prefs.getString('nickname') ?? '',
           )
       );
       // 댓글 리스트 초기화

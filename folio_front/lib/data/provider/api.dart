@@ -11,7 +11,7 @@ import '../model/comment_request_model.dart';
 import '../model/folio_reqeust_model.dart';
 import '../model/folio_response_model.dart';
 
-const baseUrl = 'https://proxy.cors.sh/http://52.78.19.37:8080';
+const baseUrl = 'http://52.78.19.37:8080';
 // const baseUrl = 'http://localhost:80';
 // aws = http://52.78.19.37:8080;
 
@@ -24,7 +24,6 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(requestModel.toJson()),
     );
@@ -47,7 +46,6 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(requestModel.toJson()),
     );
@@ -70,7 +68,6 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf',
         'Authorization': 'Bearer $jwtToken',
       },
       body: jsonEncode(boardRequestModel.toJson()),
@@ -116,7 +113,6 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
     );
 
@@ -168,7 +164,6 @@ class MyApiClient {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${commentRequestModel.jwtToken}',
-        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(commentRequestModel.toJson()),
     );
@@ -214,7 +209,6 @@ class MyApiClient {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $jwtToken',
-        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
       body: jsonEncode(requestDTO.toJson()),
     );
@@ -259,7 +253,6 @@ class MyApiClient {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'x-cors-api-key': 'temp_fb4038bf576cae12e6e08bad493ddedf'
       },
     );
 

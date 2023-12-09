@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/app/controller/login_controller.dart';
 import 'package:folio_front/common/app_colors.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
@@ -13,7 +13,6 @@ class PortfolioPage extends StatefulWidget {
 
 class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProviderStateMixin{
 
-  final storage = const FlutterSecureStorage();
   String jwtToken = '';
 
   late final AnimationController _controller;
@@ -35,7 +34,8 @@ class _PortfolioPageState extends State<PortfolioPage> with SingleTickerProvider
   }
 
   getToken() async {
-    jwtToken = await storage.read(key: 'jwt') ?? '';
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    jwtToken = prefs.getString('jwt') ?? '';
   }
 
   @override

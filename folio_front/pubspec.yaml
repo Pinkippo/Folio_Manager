@@ -55,7 +55,7 @@ dependencies:
   url_strategy: ^0.2.0
 
   #storage
-  flutter_secure_storage:
+  shared_preferences: 
 
   #pdf
   syncfusion_flutter_pdf: ^23.2.6

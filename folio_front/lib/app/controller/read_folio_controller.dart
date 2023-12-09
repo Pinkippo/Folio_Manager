@@ -1,4 +1,3 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:folio_front/data/model/board_response_model.dart';
 import 'package:folio_front/data/model/comment_request_model.dart';
 import 'package:folio_front/data/model/folio_response_model.dart';
