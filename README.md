@@ -10,7 +10,7 @@
 
 기한 : **2023.10.23 ~ 2023.12.06**
 
-현재 배포중 : [Folio 바로가기](https://folio-16962.web.app/)
+현재 배포중 : [Folio 바로가기](http://foliofront.s3-website.ap-northeast-2.amazonaws.com/)
 
 <br>
 
@@ -27,10 +27,11 @@
 
 ## 📌 TODO
 
-- 파이어베이스 호스팅 + 미들웨어 프록시 배포를 S3 정적 웹 호스팅 변경
-- http 배포를 위한 flutter_secure_storage 제거
+- ~~파이어베이스 호스팅 + 미들웨어 프록시 배포를 S3 정적 웹 호스팅 변경~~
+- ~~http 배포를 위한 flutter_secure_storage 제거~~
 - 포트폴리오 디자인 수정
-- EC2 서버 안정화 
+- 데이터 호출 횟수 최적화
+- ~~EC2 서버 안정화~~
 
 <br>
 
