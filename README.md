@@ -10,7 +10,7 @@
 
 기한 : **2023.10.23 ~ 2023.12.06**
 
-현재 배포중 : [Folio 바로가기](http://foliofront.s3-website.ap-northeast-2.amazonaws.com/)
+잠시 중지 : [Folio 바로가기](http://foliofront.s3-website.ap-northeast-2.amazonaws.com/)
 
 <br>
 
